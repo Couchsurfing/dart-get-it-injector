@@ -30,4 +30,14 @@ dev_dependencies:
     lints: ^3.0.0
     test: ^1.24.9
 
+dependency_overrides:
+    get_it_injector:
+        git:
+            url: https://github.com/Couchsurfing/dart-get-it-injector
+            path: get_it_injector
+    get_it_injector_core:
+        git:
+            url: https://github.com/Couchsurfing/dart-get-it-injector
+            path: get_it_injector_core
+
 scripts: ../scripts.yaml
