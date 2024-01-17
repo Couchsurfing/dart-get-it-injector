@@ -44,12 +44,10 @@ class ClassVisitor extends RecursiveElementVisitor<void> {
       priority: priority ?? settings.defaultPriority,
       group: group,
       registerType: registerType ?? settings.registerDefault.annotationValue,
-      ignoreForFile: [...settings.ignoreForFile],
+      ignoreForFile: settings.ignoreForFile,
     );
 
     nodes.add(element);
-
-    settings.ignoreForFile.clear();
   }
 }
 

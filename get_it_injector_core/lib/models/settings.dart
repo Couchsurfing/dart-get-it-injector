@@ -23,7 +23,7 @@ class Settings implements SettingsInterface {
     required this.ignoreForFile,
   });
 
-  Settings.defaults({
+  const Settings.defaults({
     this.registerAsImplementation = false,
     this.priorities = const [],
     this.groups = const {},
@@ -34,8 +34,8 @@ class Settings implements SettingsInterface {
     this.autoRegister = false,
     this.register = const [],
     this.doNotRegister = const [],
-    List<String>? ignoreForFile,
-  }) : ignoreForFile = ignoreForFile ?? [];
+    this.ignoreForFile = const [],
+  });
 
   factory Settings.fromJson(Map json) {
     final result = _$SettingsFromJson(json);
@@ -102,7 +102,6 @@ class Settings implements SettingsInterface {
   final List<String> singletons;
 
   @override
-  @JsonKey(defaultValue: [])
   final List<String> ignoreForFile;
 
   Priority get defaultPriority => lowPriority;

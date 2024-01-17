@@ -45,7 +45,7 @@ Settings _$SettingsFromJson(Map json) => Settings.defaults(
       ignoreForFile: (json['ignore_for_file'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
-          [],
+          const [],
     );
 
 Map<String, dynamic> _$SettingsToJson(Settings instance) => <String, dynamic>{
