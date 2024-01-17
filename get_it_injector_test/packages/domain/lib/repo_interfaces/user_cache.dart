@@ -1,0 +1,3 @@
+class UserCache {
+  const UserCache();
+}

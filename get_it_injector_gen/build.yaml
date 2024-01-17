@@ -1,0 +1,26 @@
+builders:
+    get_it_injector_gen:
+        target: get_it_injector_gen
+        import: package:get_it_injector_gen/builders.dart
+        builder_factories:
+            - breakdownGenerator
+        build_extensions:
+            .dart:
+                - .get_it_injector.json
+        auto_apply: dependents
+        build_to: cache
+        runs_before:
+            - get_it_injector_gen|get_it_injector_config_gen
+        defaults:
+            options:
+                register_as_implementation: false
+
+    get_it_injector_config_gen:
+        import: package:get_it_injector_gen/builders.dart
+        builder_factories:
+            - getItInjectorGenerator
+        build_extensions:
+            .dart:
+                - .config.dart
+        auto_apply: dependents
+        build_to: source

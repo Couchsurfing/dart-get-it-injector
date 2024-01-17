@@ -1,0 +1,3 @@
+class Dio {
+  const Dio();
+}

@@ -1,0 +1,13 @@
+[
+    {
+        "type": "Repo",
+        "import": "package:a/test/inputs/test_1/repo.dart",
+        "implementation": null,
+        "constructor": "",
+        "parameters": [],
+        "priority": 0,
+        "group": null,
+        "register_type": "factory",
+        "ignore_for_file": []
+    }
+]

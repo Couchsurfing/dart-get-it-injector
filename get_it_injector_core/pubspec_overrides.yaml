@@ -1,0 +1,3 @@
+dependency_overrides:
+    get_it_injector:
+        path: ../get_it_injector

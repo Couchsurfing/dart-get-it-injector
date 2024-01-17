@@ -1,0 +1,16 @@
+[
+    {
+        "type": "PeopleRepositoryImpl",
+        "import": "package:a/test/inputs/test_3/class_with_extends.dart",
+        "implementation": {
+            "type": "PeopleRepository",
+            "import": "package:a/test/inputs/test_3/class_with_extends.dart"
+        },
+        "constructor": "",
+        "parameters": [],
+        "priority": 0,
+        "group": null,
+        "register_type": "factory",
+        "ignore_for_file": []
+    }
+]

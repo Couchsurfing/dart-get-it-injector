@@ -1,0 +1,3 @@
+class UserRepo {
+  const UserRepo();
+}

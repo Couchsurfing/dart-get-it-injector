@@ -1,0 +1,3 @@
+class UserDataSource {
+  const UserDataSource();
+}

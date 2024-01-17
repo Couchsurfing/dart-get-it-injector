@@ -1,0 +1,10 @@
+name: _domain
+publish_to: 'none'
+
+environment:
+    sdk: '>=2.17.0 <4.0.0'
+
+dev_dependencies:
+    derry: ^1.5.0
+
+scripts: ../../../scripts.yaml

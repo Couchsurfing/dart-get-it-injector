@@ -1,0 +1,4 @@
+enum ParameterType {
+  named,
+  positional,
+}

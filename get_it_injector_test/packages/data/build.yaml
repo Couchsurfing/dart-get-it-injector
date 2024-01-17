@@ -1,0 +1,19 @@
+targets:
+    $default:
+        builders:
+            get_it_injector_gen:
+                enabled: true
+                options:
+                    register_as_implementation: true
+                    priorities:
+                        - DataSource
+                        - Repo
+                    groups:
+                        cache:
+                            - Cache
+                        dataSource:
+                            - DataSource
+                        repo:
+                            - Repo
+                    lazy_singletons:
+                        - Cache
