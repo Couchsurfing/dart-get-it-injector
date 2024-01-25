@@ -13,3 +13,7 @@
 -   **Grouping:** Organize injectables into groups, each with its own priority, to further customize the injection order and manage dependencies more effectively.
 
 Read more about how to use `get_it_injector` in [`get_it_injector_gen`](https://pub.dev/packages/get_it_injector_gen).
+
+## License
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+This software is released under the Apache 2.0 license. https://www.apache.org/licenses/LICENSE-2.0

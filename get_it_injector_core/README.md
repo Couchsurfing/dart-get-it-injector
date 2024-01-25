@@ -16,3 +16,7 @@ For detailed instructions on how to use these packages, please refer to their re
 ## Issues and Contributions
 
 If you encounter any issues related to the core package or have suggestions for improvements, consider checking the documentation of the generator packages or contribute to the project on [GitHub](https://github.com/your-username/get_it_injector).
+
+## License
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+This software is released under the Apache 2.0 license. https://www.apache.org/licenses/LICENSE-2.0
