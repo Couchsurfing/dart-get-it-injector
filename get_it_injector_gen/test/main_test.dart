@@ -14,8 +14,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
  */
 import 'package:get_it_injector_gen/builders.dart';
-import 'package:get_it_injector_core/get_it_injector_core.dart';
+
 import 'package:generator_test/generator_test.dart';
+import 'package:get_it_injector_gen/models/settings.dart';
 import 'package:test/scaffolding.dart';
 
 class GeneratorInput {

@@ -1,17 +1,17 @@
 setup:
-    - dart pub get --precompile
-
-pub:
-    get: dart run very_good_cli:very_good packages get --recursive
+  - dart pub get --precompile
 
 build_runner:
-    build: dart run build_runner build --delete-conflicting-outputs
-    watch: dart run build_runner watch --delete-conflicting-outputs
-    clean: dart run build_runner clean
+  (aliases): br
 
-br:
-    b: $build_runner:build
-    w: $build_runner:watch
-    c: $build_runner:clean
+  build:
+    (aliases): b
+    (command): cd get_it_injector_gen && dart run build_runner build --delete-conflicting-outputs
 
-test: cd get_it_injector_test && dart run derry test
+  watch:
+    (aliases): w
+    (command): cd get_it_injector_gen && dart run build_runner watch --delete-conflicting-outputs
+
+  clean:
+    (aliases): c
+    (command): cd get_it_injector_gen && dart run build_runner clean

@@ -13,5 +13,23 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
  */
-export 'models/models.dart';
-export 'enums/enums.dart';
+import 'package:get_it_injector_gen/models/importable.dart';
+import 'package:json_annotation/json_annotation.dart';
+
+part 'implementation.g.dart';
+
+@JsonSerializable()
+class Implementation implements Importable {
+  const Implementation({
+    required this.type,
+    required this.import,
+  });
+
+  factory Implementation.fromJson(Map<String, dynamic> json) =>
+      _$ImplementationFromJson(json);
+
+  final String type;
+  final String import;
+
+  Map<String, dynamic> toJson() => _$ImplementationToJson(this);
+}

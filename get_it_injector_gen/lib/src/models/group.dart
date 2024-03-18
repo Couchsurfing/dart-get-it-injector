@@ -15,7 +15,7 @@ limitations under the License.
  */
 import 'package:analyzer/dart/constant/value.dart';
 import 'package:get_it_injector/get_it_injector.dart';
-import 'package:get_it_injector_core/get_it_injector_core.dart' as core;
+import 'package:get_it_injector_gen/models/group.dart' as core;
 
 class Group extends core.Group {
   const Group({

@@ -15,9 +15,9 @@ limitations under the License.
  */
 import 'package:get_it_injector/get_it_injector.dart'
     show Priority, lowPriority;
-import 'package:get_it_injector_core/enums/register_type.dart';
-import 'package:get_it_injector_core/models/group.dart';
-import 'package:get_it_injector_core/models/settings_interface.dart';
+import 'package:get_it_injector_gen/enums/register_type.dart';
+import 'package:get_it_injector_gen/models/group.dart';
+import 'package:get_it_injector_gen/models/settings_interface.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'settings.g.dart';

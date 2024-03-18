@@ -16,7 +16,9 @@ limitations under the License.
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/visitor.dart';
 import 'package:get_it_injector/get_it_injector.dart' hide Group;
-import 'package:get_it_injector_core/get_it_injector_core.dart';
+import 'package:get_it_injector_gen/models/group.dart';
+import 'package:get_it_injector_gen/models/settings.dart';
+
 import 'package:get_it_injector_gen/src/checkers/checkers.dart';
 import 'package:get_it_injector_gen/src/models/models.dart' as gen;
 

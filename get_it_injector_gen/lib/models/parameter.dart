@@ -13,23 +13,34 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
  */
-import 'package:get_it_injector_core/models/importable.dart';
+import 'package:get_it_injector_gen/enums/parameter_type.dart';
+import 'package:get_it_injector_gen/models/importable.dart';
+import 'package:get_it_injector_gen/models/parameters.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'implementation.g.dart';
+part 'parameter.g.dart';
 
 @JsonSerializable()
-class Implementation implements Importable {
-  const Implementation({
+class Parameter with Parameters implements Importable {
+  const Parameter({
+    required this.name,
     required this.type,
+    required this.isRequired,
+    required this.defaultValue,
+    required this.location,
     required this.import,
+    required this.parameters,
   });
 
-  factory Implementation.fromJson(Map<String, dynamic> json) =>
-      _$ImplementationFromJson(json);
+  factory Parameter.fromJson(Map json) => _$ParameterFromJson(json);
 
+  final String name;
   final String type;
-  final String import;
+  final bool isRequired;
+  final String? defaultValue;
+  final ParameterType location;
+  final String? import;
+  final List<Parameter> parameters;
 
-  Map<String, dynamic> toJson() => _$ImplementationToJson(this);
+  Map<String, dynamic> toJson() => _$ParameterToJson(this);
 }

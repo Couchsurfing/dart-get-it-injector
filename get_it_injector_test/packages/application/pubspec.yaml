@@ -13,14 +13,9 @@ dependencies:
 dev_dependencies:
     build_runner: ^2.4.7
     get_it_injector_gen:
-    derry: ^1.5.0
 
 dependency_overrides:
     get_it_injector:
         path: ../../../get_it_injector
-    get_it_injector_core:
-        path: ../../../get_it_injector_core
     get_it_injector_gen:
         path: ../../../get_it_injector_gen
-
-scripts: ../../../scripts.yaml

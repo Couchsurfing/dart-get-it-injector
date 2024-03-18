@@ -21,7 +21,9 @@ import 'package:build/build.dart';
 import 'package:code_builder/code_builder.dart';
 import 'package:dart_style/dart_style.dart';
 import 'package:get_it_injector/get_it_injector.dart';
-import 'package:get_it_injector_core/get_it_injector_core.dart';
+import 'package:get_it_injector_gen/models/injectable.dart';
+import 'package:get_it_injector_gen/models/settings.dart';
+
 import 'package:get_it_injector_gen/src/writers/write_config.dart';
 import 'package:glob/glob.dart';
 import 'package:source_gen/source_gen.dart';

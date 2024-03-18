@@ -3,7 +3,11 @@ import 'dart:convert';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:get_it_injector/get_it_injector.dart'
     show Priority, RegisterType;
-import 'package:get_it_injector_core/get_it_injector_core.dart';
+import 'package:get_it_injector_gen/enums/parameter_type.dart';
+import 'package:get_it_injector_gen/models/implementation.dart';
+import 'package:get_it_injector_gen/models/injectable.dart';
+import 'package:get_it_injector_gen/models/parameter.dart';
+import 'package:get_it_injector_gen/models/group.dart';
 
 class InjectableElement {
   const InjectableElement({

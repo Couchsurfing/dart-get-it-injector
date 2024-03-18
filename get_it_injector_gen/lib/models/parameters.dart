@@ -13,8 +13,8 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
  */
-import 'package:get_it_injector_core/enums/parameter_type.dart';
-import 'package:get_it_injector_core/models/parameter.dart';
+import 'package:get_it_injector_gen/enums/parameter_type.dart';
+import 'package:get_it_injector_gen/models/parameter.dart';
 
 abstract mixin class Parameters {
   List<Parameter> get parameters;

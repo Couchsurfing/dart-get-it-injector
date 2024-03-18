@@ -14,11 +14,12 @@ See the License for the specific language governing permissions and
 limitations under the License.
  */
 import 'package:change_case/change_case.dart';
-import 'package:code_builder/code_builder.dart';
+import 'package:code_builder/code_builder.dart' hide Parameter;
 import 'package:get_it_injector/get_it_injector.dart' show RegisterType;
-import 'package:get_it_injector_core/get_it_injector_core.dart' hide Parameter;
-import 'package:get_it_injector_core/get_it_injector_core.dart' as core
-    show Parameter;
+import 'package:get_it_injector_gen/models/group.dart';
+import 'package:get_it_injector_gen/models/importable.dart';
+import 'package:get_it_injector_gen/models/injectable.dart';
+import 'package:get_it_injector_gen/models/parameter.dart';
 import 'package:get_it_injector_gen/src/models/indexed_import.dart';
 
 Map<String, IndexedImport> _indexedImports = {};
@@ -209,7 +210,7 @@ Expression _writeInvocation(Injectable injectable) {
 }
 
 Expression _writeParameter(
-  core.Parameter param,
+  Parameter param,
 ) {
   return refer('get').newInstance(
     [

@@ -14,11 +14,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
  */
 import 'package:get_it_injector/get_it_injector.dart' show RegisterType;
-import 'package:get_it_injector_core/models/group.dart';
-import 'package:get_it_injector_core/models/implementation.dart';
-import 'package:get_it_injector_core/models/importable.dart';
-import 'package:get_it_injector_core/models/parameter.dart';
-import 'package:get_it_injector_core/models/parameters.dart';
+import 'package:get_it_injector_gen/models/group.dart';
+import 'package:get_it_injector_gen/models/implementation.dart';
+import 'package:get_it_injector_gen/models/importable.dart';
+import 'package:get_it_injector_gen/models/parameter.dart';
+import 'package:get_it_injector_gen/models/parameters.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'injectable.g.dart';
