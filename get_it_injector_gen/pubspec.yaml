@@ -13,7 +13,7 @@ dependencies:
     change_case: ^2.0.1
     code_builder: ^4.9.0
     dart_style: ^2.3.4
-    get_it_injector:
+    get_it_injector: any
     equatable: '>=2.0.0 <3.0.0'
     glob: ^2.1.2
     json_annotation: ^4.8.1
