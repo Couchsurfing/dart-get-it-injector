@@ -252,11 +252,9 @@ packages:
   get_it_injector:
     dependency: "direct main"
     description:
-      path: get_it_injector
-      ref: HEAD
-      resolved-ref: "6731cc88de3883ab411f4de96bfb27cbe424d939"
-      url: "https://github.com/Couchsurfing/dart-get-it-injector"
-    source: git
+      path: "../get_it_injector"
+      relative: true
+    source: path
     version: "0.1.0"
   glob:
     dependency: "direct main"
