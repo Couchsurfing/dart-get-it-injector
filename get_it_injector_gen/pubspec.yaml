@@ -20,12 +20,14 @@ dependencies:
     change_case: ^2.0.1
     code_builder: ^4.9.0
     dart_style: ^2.3.4
-    get_it_injector: ">=0.1.0 <1.0.0"
     equatable: '>=2.0.0 <3.0.0'
+    get_it_injector: ">=0.1.0 <1.0.0"
     glob: ^2.1.2
     json_annotation: ^4.8.1
     meta: '>=1.0.0 <2.0.0'
+    path: ^1.9.0
     source_gen: ^1.4.0
+    source_span: ^1.10.0
 
 dev_dependencies:
     autoequal_gen: ^0.9.1
