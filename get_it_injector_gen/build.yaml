@@ -1,26 +1,45 @@
-builders:
-    get_it_injector_gen:
-        target: get_it_injector_gen
-        import: package:get_it_injector_gen/builders.dart
-        builder_factories:
-            - breakdownGenerator
-        build_extensions:
-            .dart:
-                - .get_it_injector.json
-        auto_apply: dependents
-        build_to: cache
-        runs_before:
-            - get_it_injector_gen|get_it_injector_config_gen
-        defaults:
-            options:
-                register_as_implementation: false
+# targets:
+#   $default:
+#     builders:
+#       json_serializable:
+#         enabled: true
+#         generate_for:
+#           include:
+#             - lib/models/*.dart
+#         options:
+#           explicit_to_json: true
+#           include_if_null: true
+#           any_map: true
+#           field_rename: snake
 
-    get_it_injector_config_gen:
-        import: package:get_it_injector_gen/builders.dart
-        builder_factories:
-            - getItInjectorGenerator
-        build_extensions:
-            .dart:
-                - .config.dart
-        auto_apply: dependents
-        build_to: source
+#       autoequal_gen:
+#         enabled: true
+#         options:
+#           auto_include: true
+
+builders:
+  get_it_injector_gen:
+    target: get_it_injector_gen
+    import: package:get_it_injector_gen/builders.dart
+    builder_factories:
+      - breakdownGenerator
+    build_extensions:
+      .dart:
+        - .get_it_injector.json
+    auto_apply: dependents
+    build_to: cache
+    runs_before:
+      - get_it_injector_gen|get_it_injector_config_gen
+    defaults:
+      options:
+        register_as_implementation: false
+
+  get_it_injector_config_gen:
+    import: package:get_it_injector_gen/builders.dart
+    builder_factories:
+      - getItInjectorGenerator
+    build_extensions:
+      .dart:
+        - .config.dart
+    auto_apply: dependents
+    build_to: source

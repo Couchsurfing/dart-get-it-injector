@@ -2,6 +2,13 @@ name: get_it_injector_gen
 description: >-
     Automate class registration for dependency injection using `get_it`,
     Simplify and manage dependencies effortlessly in Dart projects.
+
+homepage: https://github.com/Couchsurfing/dart-get-it-injector
+repository: https://github.com/Couchsurfing/dart-get-it-injector
+issue_tracker: https://github.com/Couchsurfing/dart-get-it-injector/issues
+
+topics: [dependency-injection, get_it, di, code-generation]
+
 version: 0.1.0
 
 environment:
@@ -13,10 +20,7 @@ dependencies:
     change_case: ^2.0.1
     code_builder: ^4.9.0
     dart_style: ^2.3.4
-    get_it_injector:
-        git:
-            url: https://github.com/Couchsurfing/dart-get-it-injector
-            path: get_it_injector
+    get_it_injector: ">=0.1.0 <1.0.0"
     equatable: '>=2.0.0 <3.0.0'
     glob: ^2.1.2
     json_annotation: ^4.8.1

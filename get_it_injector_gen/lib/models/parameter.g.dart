@@ -25,7 +25,7 @@ Map<String, dynamic> _$ParameterToJson(Parameter instance) => <String, dynamic>{
       'default_value': instance.defaultValue,
       'location': _$ParameterTypeEnumMap[instance.location]!,
       'import': instance.import,
-      'parameters': instance.parameters,
+      'parameters': instance.parameters.map((e) => e.toJson()).toList(),
     };
 
 const _$ParameterTypeEnumMap = {

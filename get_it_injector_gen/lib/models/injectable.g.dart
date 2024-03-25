@@ -30,11 +30,11 @@ Map<String, dynamic> _$InjectableToJson(Injectable instance) =>
     <String, dynamic>{
       'type': instance.type,
       'import': instance.import,
-      'implementation': instance.implementation,
+      'implementation': instance.implementation?.toJson(),
       'constructor': instance.constructor,
-      'parameters': instance.parameters,
+      'parameters': instance.parameters.map((e) => e.toJson()).toList(),
       'priority': instance.priority,
-      'group': instance.group,
+      'group': instance.group?.toJson(),
       'register_type': _$RegisterTypeEnumMap[instance.registerType]!,
       'ignore_for_file': instance.ignoreForFile,
     };
