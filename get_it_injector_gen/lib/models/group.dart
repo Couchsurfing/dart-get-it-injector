@@ -15,14 +15,12 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 // --- LICENSE ---
-import 'package:autoequal/autoequal.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:get_it_injector/get_it_injector.dart' as annotations;
 
 part 'group.g.dart';
 
-@autoequal
 @JsonSerializable()
 class Group extends Equatable implements annotations.Group {
   const Group({
