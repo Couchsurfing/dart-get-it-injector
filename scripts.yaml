@@ -92,7 +92,7 @@ prep:
     echo "Copying LICENSE to all packages"
     DIRS="{DIRS}"
     for dir in $DIRS; do
-      cp LICENSE.txt $dir/LICENSE.txt
+      cp LICENSE $dir/LICENSE
     done
   pubspecs: |
     # get version from changelog
