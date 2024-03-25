@@ -27,13 +27,17 @@ FILES=$(find "$DIR" -type f)
 
 IGNORE_FILES=(.test_optimizer.dart type_checker.dart)
 IGNORE_EXT=(.g.dart .config.dart)
-IGNORE_DIRS=(test/fixtures)
+IGNORE_DIRS=(/test/)
 
 # iterate over all files
 for FILE in $FILES; do
     if ! [[ "$FILE" == *.dart ]]; then
         continue
     fi
+
+    # the license blob is located between "--- LICENSE ---" and "--- LICENSE ---"
+    # remove all content within these lines
+    sed -i '' '/\/\/ --- LICENSE ---/,/\/\/ --- LICENSE ---/c\''' "$FILE"
 
     # ignore extension
     for ext in "${IGNORE_EXT[@]}"; do
@@ -53,10 +57,6 @@ for FILE in $FILES; do
             continue 2
         fi
     done
-
-    # the license blob is located between "--- LICENSE ---" and "--- LICENSE ---"
-    # remove all content within these lines
-    sed -i '' '/\/\/ --- LICENSE ---/,/\/\/ --- LICENSE ---/c\''' "$FILE"
 
     # if the file does not contain the license blob, add it at the beginning
     if ! grep -q '\/\/ \-\-\- LICENSE \-\-\-' "$FILE"; then
