@@ -7,7 +7,7 @@ homepage: https://github.com/Couchsurfing/dart-get-it-injector
 repository: https://github.com/Couchsurfing/dart-get-it-injector
 issue_tracker: https://github.com/Couchsurfing/dart-get-it-injector/issues
 
-topics: [dependency-injection, get_it, di, code-generation]
+topics: [dependency-injection, get-it, di, code-generation]
 
 version: 0.1.0
 
