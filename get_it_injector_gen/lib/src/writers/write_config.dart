@@ -22,21 +22,16 @@ import 'package:get_it_injector_gen/models/group.dart';
 import 'package:get_it_injector_gen/models/importable.dart';
 import 'package:get_it_injector_gen/models/injectable.dart';
 import 'package:get_it_injector_gen/models/parameter.dart';
-import 'package:get_it_injector_gen/src/models/indexed_import.dart';
+import 'package:get_it_injector_gen/src/models/named_import.dart';
 
-Map<String, IndexedImport> _indexedImports = {};
+Map<String, NamedImport> _indexedImports = {};
 
 List<Spec> writeConfig(List<Injectable> injectables) {
   final allImports = injectables.expand((e) => e.imports).toSet().toList();
 
-  _indexedImports = <String, IndexedImport>{};
-  for (var i = 0; i < allImports.length; i++) {
-    final import = allImports[i];
-
-    _indexedImports[import] = IndexedImport(
-      import: import,
-      index: i,
-    );
+  _indexedImports = <String, NamedImport>{};
+  for (final import in allImports) {
+    _indexedImports[import] = NamedImport(import);
   }
 
   final allIgnores =
@@ -63,7 +58,7 @@ List<Code> _writeIgnores(Iterable<String> ignores) {
 }
 
 // get_it/get_it.dart
-List<Spec> _writeImports(Iterable<IndexedImport> imports) {
+List<Spec> _writeImports(Iterable<NamedImport> imports) {
   final directives = imports.map(
     (e) => Directive.import(
       e.import,

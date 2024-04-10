@@ -1,4 +1,5 @@
 // --- LICENSE ---
+
 /**
 Copyright 2024 CouchSurfing International Inc.
 
@@ -15,14 +16,17 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 // --- LICENSE ---
-class IndexedImport {
-  const IndexedImport({
-    required this.import,
-    required this.index,
-  });
+
+import 'package:path/path.dart';
+
+class NamedImport {
+  const NamedImport(this.import);
 
   final String import;
-  final int index;
 
-  String get namespace => 'i$index';
+  String get namespace {
+    final basename = basenameWithoutExtension(import);
+
+    return 'i_$basename';
+  }
 }
