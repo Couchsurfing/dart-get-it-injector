@@ -5,13 +5,15 @@
 // **************************************************************************
 
 import 'package:get_it/get_it.dart';
-import 'package:_domain/models/dio.dart' as i0;
-import 'package:_domain/repo_interfaces/user_data_source.dart' as i1;
-import 'package:_data/repos/user_data_source_impl.dart' as i2;
-import 'package:_domain/repo_interfaces/user_cache.dart' as i3;
-import 'package:_domain/repo_interfaces/user_repo.dart' as i4;
-import 'package:_data/repos/user_repo_impl.dart' as i5;
-import 'package:_data/repos/user_cache_impl.dart' as i6;
+import 'package:_domain/models/dio.dart' as i_dio;
+import 'package:_domain/repo_interfaces/user_data_source.dart'
+    as i_user_data_source;
+import 'package:_data/repos/user_data_source_impl.dart'
+    as i_user_data_source_impl;
+import 'package:_domain/repo_interfaces/user_cache.dart' as i_user_cache;
+import 'package:_domain/repo_interfaces/user_repo.dart' as i_user_repo;
+import 'package:_data/repos/user_repo_impl.dart' as i_user_repo_impl;
+import 'package:_data/repos/user_cache_impl.dart' as i_user_cache_impl;
 
 extension GetItX on GetIt {
   void init() {
@@ -21,18 +23,19 @@ extension GetItX on GetIt {
   }
 
   void _registerCache() {
-    registerLazySingleton<i3.UserCache>(() => i6.UserCacheImpl());
+    registerLazySingleton<i_user_cache.UserCache>(
+        () => i_user_cache_impl.UserCacheImpl());
   }
 
   void _registerDataSource() {
-    registerFactory<i1.UserDataSource>(
-        () => i2.UserDataSourceImpl(dio: get<i0.Dio>()));
+    registerFactory<i_user_data_source.UserDataSource>(() =>
+        i_user_data_source_impl.UserDataSourceImpl(dio: get<i_dio.Dio>()));
   }
 
   void _registerRepo() {
-    registerFactory<i4.UserRepo>(() => i5.UserRepoImpl(
-          userDataSource: get<i1.UserDataSource>(),
-          userCache: get<i3.UserCache>(),
+    registerFactory<i_user_repo.UserRepo>(() => i_user_repo_impl.UserRepoImpl(
+          userDataSource: get<i_user_data_source.UserDataSource>(),
+          userCache: get<i_user_cache.UserCache>(),
         ));
   }
 }

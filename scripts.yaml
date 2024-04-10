@@ -1,4 +1,4 @@
-(variables) :
+(variables):
   DIRS: get_it_injector get_it_injector_gen
 
 setup:
@@ -68,7 +68,7 @@ prep:
     - (+) {$prep:conduct}
     - (+) {$prep:contributing}
     - (+) {$prep:license}
-    - '{$license:add}'
+    - "{$license:add}"
     - sip pub get -r
   changelog: |
     echo "Copying CHANGELOG.md to all packages"
@@ -103,3 +103,27 @@ prep:
     for dir in $DIRS; do
       sed -i '' "s|^version: .*|version: $version|g" "$dir/pubspec.yaml"
     done
+
+test:
+  integration:
+    _generate: dart run build_runner build --delete-conflicting-outputs;
+
+    (bail):
+    (command):
+      - |
+        # Remove .dart_tool directories
+        cd get_it_injector_test;
+        find . -name .dart_tool -type d -exec rm -rf {} \; || true
+      - |
+        # Get Dependencies
+        cd get_it_injector_test;
+        sip pub get -r --quiet --precompile
+      - |
+        (+) # Generate application code
+        cd get_it_injector_test/packages/application;
+        {$test:integration:_generate}
+      - |
+        (+) # Generate data code
+        cd get_it_injector_test/packages/data;
+        {$test:integration:_generate}
+      - cd get_it_injector_test; sip test -r

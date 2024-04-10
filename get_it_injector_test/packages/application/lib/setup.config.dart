@@ -5,11 +5,12 @@
 // **************************************************************************
 
 import 'package:get_it/get_it.dart';
-import 'package:_domain/repo_interfaces/user_repo.dart' as i0;
-import 'package:_application/blocs/user_bloc.dart' as i1;
+import 'package:_domain/repo_interfaces/user_repo.dart' as i_user_repo;
+import 'package:_application/blocs/user_bloc.dart' as i_user_bloc;
 
 extension GetItX on GetIt {
   void init() {
-    registerFactory(() => i1.UserBloc(userRepo: get<i0.UserRepo>()));
+    registerFactory(
+        () => i_user_bloc.UserBloc(userRepo: get<i_user_repo.UserRepo>()));
   }
 }
