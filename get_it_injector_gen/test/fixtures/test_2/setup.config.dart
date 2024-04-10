@@ -5,12 +5,12 @@
 // **************************************************************************
 
 import 'package:get_it/get_it.dart';
-import 'package:a/test/inputs/test_1/repo.dart' as i0;
-import 'package:a/test/inputs/test_1/repo_impl.dart' as i1;
+import 'package:a/test/inputs/test_1/repo.dart' as i_repo;
+import 'package:a/test/inputs/test_1/repo_impl.dart' as i_repo_impl;
 
 extension GetItX on GetIt {
   void init() {
-    registerFactory<i0.Repo>(() => i1.RepoImpl());
-    registerFactory(() => i0.Repo());
+    registerFactory<i_repo.Repo>(() => i_repo_impl.RepoImpl());
+    registerFactory(() => i_repo.Repo());
   }
 }
