@@ -1,3 +1,9 @@
+# 0.2.0 | 6.5.2024
+
+## Enhancements
+
+- Sort imports alphabetically
+
 # 0.1.1 | 4.10.2024
 
 ## Enhancements
