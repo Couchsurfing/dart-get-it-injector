@@ -59,12 +59,16 @@ List<Code> _writeIgnores(Iterable<String> ignores) {
 
 // get_it/get_it.dart
 List<Spec> _writeImports(Iterable<NamedImport> imports) {
-  final directives = imports.map(
-    (e) => Directive.import(
-      e.import,
-      as: e.namespace,
-    ),
-  );
+  final directives = imports
+      .map(
+        (e) => Directive.import(
+          e.import,
+          as: e.namespace,
+        ),
+      )
+      .toList();
+
+  directives.sort((a, b) => a.url.compareTo(b.url));
 
   return [
     Directive.import('package:get_it/get_it.dart'),
