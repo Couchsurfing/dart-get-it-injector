@@ -61,7 +61,7 @@ class GetItInjectorGenerator extends GeneratorForAnnotation<Setup> {
 
     // the higher the priority, the earlier it is registered
     injectables
-      ..sort((a, b) => b.type.compareTo(a.type))
+      ..sort((a, b) => a.type.compareTo(b.type))
       ..sort((a, b) => b.priority.compareTo(a.priority));
 
     final emitter = DartEmitter(useNullSafetySyntax: true);
