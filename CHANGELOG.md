@@ -1,3 +1,9 @@
+# 0.2.1 | 6.7.2024
+
+## Enhancements
+
+- Register classes alphabetically and then by priority
+
 # 0.2.0 | 6.5.2024
 
 ## Enhancements
