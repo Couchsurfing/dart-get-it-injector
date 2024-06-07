@@ -10,7 +10,7 @@ import 'package:a/test/inputs/test_1/repo_impl.dart' as i_repo_impl;
 
 extension GetItX on GetIt {
   void init() {
-    registerFactory<i_repo.Repo>(() => i_repo_impl.RepoImpl());
     registerFactory(() => i_repo.Repo());
+    registerFactory<i_repo.Repo>(() => i_repo_impl.RepoImpl());
   }
 }
