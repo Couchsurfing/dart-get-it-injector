@@ -25,7 +25,6 @@ import 'package:dart_style/dart_style.dart';
 import 'package:get_it_injector/get_it_injector.dart';
 import 'package:get_it_injector_gen/models/injectable.dart';
 import 'package:get_it_injector_gen/models/settings.dart';
-
 import 'package:get_it_injector_gen/src/writers/write_config.dart';
 import 'package:glob/glob.dart';
 import 'package:source_gen/source_gen.dart';
@@ -61,7 +60,9 @@ class GetItInjectorGenerator extends GeneratorForAnnotation<Setup> {
     final injectables = raw.map((e) => Injectable.fromJson(e)).toList();
 
     // the higher the priority, the earlier it is registered
-    injectables.sort((a, b) => b.priority.compareTo(a.priority));
+    injectables
+      ..sort((a, b) => b.type.compareTo(a.type))
+      ..sort((a, b) => b.priority.compareTo(a.priority));
 
     final emitter = DartEmitter(useNullSafetySyntax: true);
 
