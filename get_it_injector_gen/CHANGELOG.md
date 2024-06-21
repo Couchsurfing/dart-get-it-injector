@@ -1,3 +1,10 @@
+# 0.3.0 | 6.21.2024
+
+## Breaking Changes
+
+- Force import string to not be null
+  - This is a breaking change because an exception will be thrown if the import string is null
+
 # 0.2.1 | 6.7.2024
 
 ## Enhancements

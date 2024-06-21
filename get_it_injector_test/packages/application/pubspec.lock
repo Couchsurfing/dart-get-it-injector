@@ -214,14 +214,14 @@ packages:
       path: "../../../get_it_injector"
       relative: true
     source: path
-    version: "0.2.1"
+    version: "0.3.0"
   get_it_injector_gen:
     dependency: "direct dev"
     description:
       path: "../../../get_it_injector_gen"
       relative: true
     source: path
-    version: "0.2.1"
+    version: "0.3.0"
   glob:
     dependency: transitive
     description:
