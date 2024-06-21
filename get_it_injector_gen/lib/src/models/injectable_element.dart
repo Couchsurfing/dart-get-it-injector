@@ -21,10 +21,10 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:get_it_injector/get_it_injector.dart'
     show Priority, RegisterType;
 import 'package:get_it_injector_gen/enums/parameter_type.dart';
+import 'package:get_it_injector_gen/models/group.dart';
 import 'package:get_it_injector_gen/models/implementation.dart';
 import 'package:get_it_injector_gen/models/injectable.dart';
 import 'package:get_it_injector_gen/models/parameter.dart';
-import 'package:get_it_injector_gen/models/group.dart';
 
 class InjectableElement {
   const InjectableElement({
@@ -76,13 +76,20 @@ Parameter _buildParameter(ParameterElement param) {
   final location =
       param.isNamed ? ParameterType.named : ParameterType.positional;
 
+  final import = type.element?.library?.identifier;
+
+  if (import == null) {
+    throw Exception(
+        'Could not find import for type: ${type.getDisplayString(withNullability: false)}');
+  }
+
   return Parameter(
     name: param.name,
     type: type.getDisplayString(withNullability: false),
     isRequired: isRequired,
     defaultValue: defaultValue,
     location: location,
-    import: type.element?.library?.identifier,
+    import: import,
     parameters: param.parameters.map(_buildParameter).toList(),
   );
 }

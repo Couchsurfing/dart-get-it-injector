@@ -41,7 +41,7 @@ class Parameter with Parameters implements Importable {
   final bool isRequired;
   final String? defaultValue;
   final ParameterType location;
-  final String? import;
+  final String import;
   final List<Parameter> parameters;
 
   Map<String, dynamic> toJson() => _$ParameterToJson(this);

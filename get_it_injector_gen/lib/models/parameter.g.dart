@@ -12,7 +12,7 @@ Parameter _$ParameterFromJson(Map json) => Parameter(
       isRequired: json['is_required'] as bool,
       defaultValue: json['default_value'] as String?,
       location: $enumDecode(_$ParameterTypeEnumMap, json['location']),
-      import: json['import'] as String?,
+      import: json['import'] as String,
       parameters: (json['parameters'] as List<dynamic>)
           .map((e) => Parameter.fromJson(e as Map))
           .toList(),

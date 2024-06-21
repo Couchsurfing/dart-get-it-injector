@@ -15,7 +15,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 // --- LICENSE ---
-abstract interface class Importable<T extends String?> {
+abstract interface class Importable<T extends String> {
   T get import;
   String get type;
 }

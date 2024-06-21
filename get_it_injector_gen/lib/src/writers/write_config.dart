@@ -226,7 +226,11 @@ Expression _writeParameter(
 }
 
 String allocate(Importable element) {
-  final indexedImport = _indexedImports[element.import]!;
+  final indexedImport = _indexedImports[element.import];
+
+  if (indexedImport == null) {
+    throw Exception('Unknown import: ${element.import}');
+  }
 
   return '${indexedImport.namespace}.${element.type}';
 }
