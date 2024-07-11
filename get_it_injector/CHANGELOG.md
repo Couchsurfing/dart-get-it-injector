@@ -1,3 +1,10 @@
+# 0.3.1 | 7.11.2024
+
+## Fixes
+
+- When a dart package was added as an import, the name space would be malformed
+  - e.g. `dart:core` would be `i_dart:core` which is a syntax error
+
 # 0.3.0 | 6.21.2024
 
 ## Breaking Changes
