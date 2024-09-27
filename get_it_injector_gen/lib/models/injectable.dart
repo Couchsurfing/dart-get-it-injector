@@ -55,7 +55,7 @@ class Injectable with Parameters implements Importable {
 
   Iterable<String> get imports => [
         ...parameterImports,
-        if (implementation != null) implementation!.import,
+        if (implementation?.import case final String value) value,
         import,
       ];
 

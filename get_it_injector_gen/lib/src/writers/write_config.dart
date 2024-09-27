@@ -83,12 +83,11 @@ Extension _writeExtension(
   final nonGroupedInjectables = <Injectable>[];
 
   for (final injectable in injectables) {
-    if (injectable.group == null) {
+    if (injectable.group case final group?) {
+      (groupedInjectables[group] ??= []).add(injectable);
+    } else {
       nonGroupedInjectables.add(injectable);
-      continue;
     }
-
-    groupedInjectables.putIfAbsent(injectable.group!, () => []).add(injectable);
   }
 
   final sortedGroupedInjectables = groupedInjectables.keys.toList()
@@ -154,8 +153,7 @@ Code _writeInjectable(
       [_writeSingleton(injectable)],
       {},
       [
-        if (injectable.implementation != null)
-          refer(allocate(injectable.implementation!)),
+        if (injectable.implementation case final value?) refer(allocate(value)),
       ],
     ).statement;
   } else if (injectable.registerType == RegisterType.factory ||
@@ -168,8 +166,7 @@ Code _writeInjectable(
       [_writeFactory(injectable)],
       {},
       [
-        if (injectable.implementation != null)
-          refer(allocate(injectable.implementation!)),
+        if (injectable.implementation case final value?) refer(allocate(value)),
       ],
     ).statement;
   }

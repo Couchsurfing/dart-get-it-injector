@@ -157,7 +157,7 @@ abstract class TypeChecker {
         i,
         throwOnUnresolved: throwOnUnresolved,
       );
-      if (value?.type != null && predicate(value!.type!)) {
+      if (value?.type case final type? when value != null && predicate(type)) {
         yield value;
       }
     }
@@ -184,9 +184,13 @@ abstract class TypeChecker {
 
   /// Returns `true` if [staticType] can be assigned to this type.
   // ignore: avoid_bool_literals_in_conditional_expressions
-  bool isAssignableFromType(DartType staticType) => staticType.element == null
-      ? false
-      : isAssignableFrom(staticType.element!);
+  bool isAssignableFromType(DartType staticType) {
+    if (staticType.element case final element?) {
+      return isAssignableFrom(element);
+    }
+
+    return false;
+  }
 
   /// Returns `true` if representing the exact same class as [element].
   bool isExactly(Element element);
@@ -205,8 +209,16 @@ abstract class TypeChecker {
     if (element is ClassElement) {
       var theSuper = element.supertype;
 
+      if (theSuper == null) {
+        return false;
+      }
+
       do {
-        if (isExactlyType(theSuper!)) {
+        if (theSuper == null) {
+          break;
+        }
+
+        if (isExactlyType(theSuper)) {
           return true;
         }
 
@@ -221,7 +233,13 @@ abstract class TypeChecker {
   ///
   /// This only takes into account the *extends* hierarchy. If you wish
   /// to check mixins and interfaces, use [isAssignableFromType].
-  bool isSuperTypeOf(DartType staticType) => isSuperOf(staticType.element!);
+  bool isSuperTypeOf(DartType staticType) {
+    if (staticType.element case final element?) {
+      return isSuperOf(element);
+    }
+
+    return false;
+  }
 }
 
 // Checks a static type against another static type;
@@ -235,7 +253,13 @@ class _LibraryTypeChecker extends TypeChecker {
       element is ClassElement && element == _type.element;
 
   @override
-  String toString() => _urlOfElement(_type.element!);
+  String toString() {
+    if (_type.element case final element?) {
+      return _urlOfElement(element);
+    }
+
+    return '';
+  }
 }
 
 @immutable
@@ -276,9 +300,10 @@ class _NamedChecker extends TypeChecker {
     if (element.name != _name) return false;
 
     // No packageName specified, ignoring it.
+    final packageName = this.packageName;
     if (packageName == null) return true;
 
-    final checker = _PackageChecker(packageName!);
+    final checker = _PackageChecker(packageName);
     return checker.isExactly(element);
   }
 
@@ -375,28 +400,44 @@ class UnresolvedAnnotationException implements Exception {
     Element annotatedElement,
     int annotationIndex,
   ) {
-    final parsedLibrary = annotatedElement.session!
-            .getParsedLibraryByElement(annotatedElement.library!)
-        as ParsedLibraryResult;
-    final declaration = parsedLibrary.getElementDeclaration(annotatedElement);
-    if (declaration == null) {
+    final library = annotatedElement.library;
+    if (library == null) {
+      print(
+        'WARNING: Could not find library for '
+        '${annotatedElement.name ?? annotatedElement.displayName}',
+      );
+
       return null;
     }
+
+    final parsedLibrary = annotatedElement.session
+        ?.getParsedLibraryByElement(library) as ParsedLibraryResult?;
+
+    final declaration = parsedLibrary?.getElementDeclaration(annotatedElement);
+    if (declaration == null) return null;
+
     final node = declaration.node;
-    final List<Annotation> metadata;
-    if (node is AnnotatedNode) {
-      metadata = node.metadata;
-    } else if (node is FormalParameter) {
-      metadata = node.metadata;
-    } else {
-      throw StateError(
-        'Unhandled Annotated AST node type: ${node.runtimeType}',
-      );
-    }
+    final metadata = switch (node) {
+      AnnotatedNode() => node.metadata,
+      FormalParameter() => node.metadata,
+      _ => throw StateError(
+          'Unhandled Annotated AST node type: ${node.runtimeType}',
+        ),
+    };
+
     final annotation = metadata[annotationIndex];
     final start = annotation.offset;
     final end = start + annotation.length;
-    final parsedUnit = declaration.parsedUnit!;
+    final parsedUnit = declaration.parsedUnit;
+
+    if (parsedUnit == null) {
+      print(
+        'WARNING: Could not resolve (declaration.parsedUnit) '
+        '${annotatedElement.name ?? annotatedElement.displayName}',
+      );
+      return null;
+    }
+
     return SourceSpan(
       SourceLocation(start, sourceUrl: parsedUnit.uri),
       SourceLocation(end, sourceUrl: parsedUnit.uri),
@@ -415,22 +456,35 @@ class UnresolvedAnnotationException implements Exception {
   @override
   String toString() {
     final message = 'Could not resolve annotation for `$annotatedElement`.';
-    if (annotationSource != null) {
-      return annotationSource!.message(message);
+    if (annotationSource case final source?) {
+      return source.message(message);
     }
+
     return message;
   }
 }
 
 /// Returns a URL representing [element].
-String _urlOfElement(Element element) => element.kind == ElementKind.DYNAMIC
-    ? 'dart:core#dynamic'
-    : element.kind == ElementKind.NEVER
-        ? 'dart:core#Never'
-        // using librarySource.uri – in case the element is in a part
-        : _normalizeUrl(element.librarySource!.uri)
+String _urlOfElement(Element element) {
+  return switch (element.kind) {
+    ElementKind.DYNAMIC => 'dart:core#dynamic',
+    ElementKind.NEVER => 'dart:core#Never',
+    _ => () {
+        final library = element.librarySource;
+        if (library == null) {
+          print(
+            'WARNING: Could not find library for '
+            '${element.name ?? element.displayName}',
+          );
+          return '';
+        }
+
+        return _normalizeUrl(library.uri)
             .replace(fragment: element.name)
             .toString();
+      }(),
+  };
+}
 
 Uri _normalizeUrl(Uri url) {
   switch (url.scheme) {
