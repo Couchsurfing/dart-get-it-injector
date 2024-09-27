@@ -1,3 +1,11 @@
+# 0.4.0 | 9.27.2024
+
+## Fixes
+
+- Remove null assertions from code
+  - If an import was not found, the builder would throw an exception with poor error messaging
+  - Now, the builder will throw an exception with a more descriptive error message
+
 # 0.3.1 | 7.11.2024
 
 ## Fixes
