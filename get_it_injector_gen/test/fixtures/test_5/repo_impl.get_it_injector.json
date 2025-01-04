@@ -1,1 +1,1 @@
-[{"type":"RepoImpl","import":"package:a/test/inputs/test_5/repo_impl.dart","implementation":{"type":"Repo","import":"package:a/test/inputs/test_5/repo.dart"},"constructor":"","parameters":[],"priority":0,"group":null,"register_type":"factory","ignore_for_file":["lint_1","lint_2"]}]
+[{"type":"RepoImpl","import":"package:a/test/inputs/test_5/repo_impl.dart","implementations":[{"type":"Repo","import":"package:a/test/inputs/test_5/repo.dart"}],"constructor":"","parameters":[],"priority":0,"group":null,"register_type":"factory","ignore_for_file":["lint_1","lint_2"]}]

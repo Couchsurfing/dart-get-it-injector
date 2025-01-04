@@ -1,0 +1,1 @@
+[{"type":"Multi","import":"package:a/test/inputs/test_6/multi.dart","implementations":[{"type":"One","import":"package:a/test/inputs/test_6/one.dart"},{"type":"Two","import":"package:a/test/inputs/test_6/two.dart"}],"constructor":"","parameters":[],"priority":0,"group":null,"register_type":"factory","ignore_for_file":[]}]

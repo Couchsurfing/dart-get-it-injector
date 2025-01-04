@@ -1,6 +1,5 @@
-import 'package:get_it_injector_gen/builders.dart';
-
 import 'package:generator_test/generator_test.dart';
+import 'package:get_it_injector_gen/builders.dart';
 import 'package:get_it_injector_gen/models/settings.dart';
 import 'package:test/scaffolding.dart';
 
@@ -67,6 +66,23 @@ void main() {
           ignoreForFile: ['lint_1', 'lint_2'],
         ),
       ),
+      GeneratorInput(
+        input: [
+          'multi.dart',
+          'one.dart',
+          'two.dart',
+        ],
+        output: [
+          'multi.get_it_injector.json',
+          'one.get_it_injector.json',
+          'two.get_it_injector.json',
+        ],
+        testDir: 'test_6',
+        options: Settings.defaults(
+          registerAsImplementation: true,
+          autoRegister: true,
+        ),
+      ),
     ];
 
     for (final input in inputs) {
@@ -109,6 +125,26 @@ void main() {
           'ignore_for_file.config.dart',
         ],
         testDir: 'test_4',
+      ),
+      GeneratorInput(
+        input: [
+          'multi.get_it_injector.json',
+          'setup.dart',
+        ],
+        output: [
+          'setup.config.dart',
+        ],
+        testDir: 'test_7',
+      ),
+      GeneratorInput(
+        input: [
+          'multi.get_it_injector.json',
+          'setup.dart',
+        ],
+        output: [
+          'setup.config.dart',
+        ],
+        testDir: 'test_8',
       )
     ];
 
