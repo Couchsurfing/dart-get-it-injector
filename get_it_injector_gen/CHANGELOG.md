@@ -1,3 +1,10 @@
+# 0.5.0 | 1.3.2025
+
+## Features
+
+- Support registering classes that implement multiple interfaces
+  - The generator will register the class as the type argument for each interface, while respecting the registration options for each interface (e.g. `singleton`, `factory`, `lazy_singleton`)
+
 # 0.4.0 | 9.27.2024
 
 ## Fixes
