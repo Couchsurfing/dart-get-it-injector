@@ -80,16 +80,16 @@ Parameter _buildParameter(ParameterElement param) {
   if (import == null) {
     throw Exception(
       '''Failed to find import!
-Type: ${type.getDisplayString(withNullability: false)}
+Type: ${type.getDisplayString()}
 Param: ${param.displayName}
-Parent: ${param.enclosingElement?.displayName ?? 'Unknown'}
+Parent: ${param.enclosingElement3?.displayName ?? 'Unknown'}
       ''',
     );
   }
 
   return Parameter(
     name: param.name,
-    type: type.getDisplayString(withNullability: false),
+    type: type.getDisplayString(),
     isRequired: isRequired,
     defaultValue: defaultValue,
     location: location,
