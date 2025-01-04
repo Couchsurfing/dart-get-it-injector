@@ -29,7 +29,7 @@ import 'package:get_it_injector_gen/models/parameter.dart';
 class InjectableElement {
   const InjectableElement({
     required this.element,
-    required this.implementation,
+    required this.implementations,
     required this.constructor,
     required this.priority,
     required this.group,
@@ -38,7 +38,7 @@ class InjectableElement {
   });
 
   final ClassElement element;
-  final InterfaceElement? implementation;
+  final List<InterfaceElement> implementations;
   final ConstructorElement constructor;
   final Priority priority;
   final Group? group;
@@ -46,17 +46,16 @@ class InjectableElement {
   final List<String> ignoreForFile;
 
   String toJson() {
-    final impl = implementation;
-
     final injectable = Injectable(
       type: element.name,
       import: element.library.identifier,
-      implementation: impl != null
-          ? Implementation(
-              type: impl.name,
-              import: impl.library.identifier,
-            )
-          : null,
+      implementations: [
+        for (final impl in implementations)
+          Implementation(
+            type: impl.name,
+            import: impl.library.identifier,
+          ),
+      ],
       constructor: constructor.name,
       parameters: constructor.parameters.map(_buildParameter).toList(),
       priority: priority.value,

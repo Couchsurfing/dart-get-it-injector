@@ -20,7 +20,6 @@ import 'package:analyzer/dart/element/visitor.dart';
 import 'package:get_it_injector/get_it_injector.dart' hide Group;
 import 'package:get_it_injector_gen/models/group.dart';
 import 'package:get_it_injector_gen/models/settings.dart';
-
 import 'package:get_it_injector_gen/src/checkers/checkers.dart';
 import 'package:get_it_injector_gen/src/models/models.dart' as gen;
 
@@ -46,7 +45,8 @@ class ClassVisitor extends RecursiveElementVisitor<void> {
     }
 
     final ConstructorElement constructor = _getConstructor(node);
-    final ClassElement? implementation = _getImplementation(node, settings);
+    final Iterable<ClassElement> implementations =
+        _getImplementation(node, settings);
     final Priority? priority = _getPriority(node, settings);
     final Group? group = _getGroup(node, settings);
     final RegisterType? registerType = _getRegisterType(node, settings);
@@ -58,7 +58,7 @@ class ClassVisitor extends RecursiveElementVisitor<void> {
 
     final element = gen.InjectableElement(
       element: node,
-      implementation: implementation,
+      implementations: implementations.toList(),
       constructor: constructor,
       priority: priority ?? settings.defaultPriority,
       group: group,
@@ -70,9 +70,10 @@ class ClassVisitor extends RecursiveElementVisitor<void> {
   }
 }
 
-ClassElement? _getImplementation(ClassElement node, Settings settings) {
+Iterable<ClassElement> _getImplementation(
+    ClassElement node, Settings settings) sync* {
   if (!settings.registerAsImplementation) {
-    return null;
+    return;
   }
 
   // get declaration string
@@ -80,29 +81,27 @@ ClassElement? _getImplementation(ClassElement node, Settings settings) {
 
   // check source if implementation keyword is used
   if (!signature.contains('implements')) {
-    return null;
+    return;
   }
 
   // get class name of implementation from source
-  final className = signature
+  final classNames = signature
       .substring(signature.indexOf('implements') + 'implements'.length)
+      .replaceAll(',', '')
       .split(' ')
-      .where((e) => e.isNotEmpty)
-      .first;
+      .where((e) => e.isNotEmpty);
 
   for (final interface in node.interfaces) {
     if (interface.element is! ClassElement) {
       continue;
     }
 
-    if (interface.element.name != className) {
+    if (!classNames.contains(interface.element.name)) {
       continue;
     }
 
-    return interface.element as ClassElement;
+    yield interface.element as ClassElement;
   }
-
-  return null;
 }
 
 Priority? _getPriority(ClassElement node, Settings settings) {

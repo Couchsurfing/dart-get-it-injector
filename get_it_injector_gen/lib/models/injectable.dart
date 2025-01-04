@@ -30,7 +30,7 @@ class Injectable with Parameters implements Importable {
   const Injectable({
     required this.type,
     required this.import,
-    required this.implementation,
+    required this.implementations,
     required this.constructor,
     required this.parameters,
     required this.priority,
@@ -43,7 +43,8 @@ class Injectable with Parameters implements Importable {
 
   final String type;
   final String import;
-  final Implementation? implementation;
+  @JsonKey(defaultValue: [])
+  final List<Implementation> implementations;
   final String constructor;
   final List<Parameter> parameters;
   final int priority;
@@ -51,11 +52,15 @@ class Injectable with Parameters implements Importable {
   final RegisterType registerType;
   final List<String> ignoreForFile;
 
+  bool get implementsOne => implementations.length == 1;
+  bool get implementsMany => implementations.length > 1;
+
   String get constructorAccess => constructor == '' ? '' : '.$constructor';
 
   Iterable<String> get imports => [
         ...parameterImports,
-        if (implementation?.import case final String value) value,
+        for (final implementation in implementations)
+          if (implementation.import case final String value) value,
         import,
       ];
 

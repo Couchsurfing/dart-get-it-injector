@@ -19,7 +19,7 @@ extension _$GroupAutoequal on Group {
 
 Group _$GroupFromJson(Map json) => Group(
       name: json['name'] as String,
-      priority: json['priority'] as int,
+      priority: (json['priority'] as num).toInt(),
     );
 
 Map<String, dynamic> _$GroupToJson(Group instance) => <String, dynamic>{

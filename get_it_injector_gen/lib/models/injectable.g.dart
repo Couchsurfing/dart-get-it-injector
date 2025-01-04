@@ -9,15 +9,16 @@ part of 'injectable.dart';
 Injectable _$InjectableFromJson(Map json) => Injectable(
       type: json['type'] as String,
       import: json['import'] as String,
-      implementation: json['implementation'] == null
-          ? null
-          : Implementation.fromJson(
-              Map<String, dynamic>.from(json['implementation'] as Map)),
+      implementations: (json['implementations'] as List<dynamic>?)
+              ?.map((e) =>
+                  Implementation.fromJson(Map<String, dynamic>.from(e as Map)))
+              .toList() ??
+          [],
       constructor: json['constructor'] as String,
       parameters: (json['parameters'] as List<dynamic>)
           .map((e) => Parameter.fromJson(e as Map))
           .toList(),
-      priority: json['priority'] as int,
+      priority: (json['priority'] as num).toInt(),
       group:
           json['group'] == null ? null : Group.fromJson(json['group'] as Map),
       registerType: $enumDecode(_$RegisterTypeEnumMap, json['register_type']),
@@ -30,7 +31,8 @@ Map<String, dynamic> _$InjectableToJson(Injectable instance) =>
     <String, dynamic>{
       'type': instance.type,
       'import': instance.import,
-      'implementation': instance.implementation?.toJson(),
+      'implementations':
+          instance.implementations.map((e) => e.toJson()).toList(),
       'constructor': instance.constructor,
       'parameters': instance.parameters.map((e) => e.toJson()).toList(),
       'priority': instance.priority,

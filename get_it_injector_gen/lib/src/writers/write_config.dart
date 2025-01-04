@@ -148,30 +148,52 @@ Method _writeGroupedInjectables(
 Code _writeInjectable(
   Injectable injectable,
 ) {
-  if (injectable.registerType == RegisterType.singleton) {
-    return refer('registerSingleton').call(
-      [_writeSingleton(injectable)],
-      {},
-      [
-        if (injectable.implementation case final value?) refer(allocate(value)),
-      ],
-    ).statement;
-  } else if (injectable.registerType == RegisterType.factory ||
-      injectable.registerType == RegisterType.lazySingleton) {
-    final call = injectable.registerType == RegisterType.factory
-        ? 'registerFactory'
-        : 'registerLazySingleton';
+  final register = switch (injectable.registerType) {
+    RegisterType.factory => 'registerFactory',
+    RegisterType.singleton => 'registerSingleton',
+    RegisterType.lazySingleton => 'registerLazySingleton',
+  };
 
-    return refer(call).call(
-      [_writeFactory(injectable)],
+  final registerable = switch (injectable.registerType) {
+    RegisterType.singleton => _writeSingleton(injectable),
+    RegisterType.factory ||
+    RegisterType.lazySingleton =>
+      _writeFactory(injectable),
+  };
+
+  if (injectable.implementsOne) {
+    return refer(register).call(
+      [registerable],
       {},
       [
-        if (injectable.implementation case final value?) refer(allocate(value)),
+        if (injectable.implementations.single case final value)
+          refer(allocate(value)),
       ],
     ).statement;
+  } else {
+    return Block.of([
+      refer(register).call([registerable], {}, []).statement,
+      for (final implementation in injectable.implementations)
+        refer(register).call([
+          switch (refer('get').call([], {}, [refer(allocate(injectable))])) {
+            final value
+                when injectable.registerType == RegisterType.singleton =>
+              value,
+            final value => value.lambda,
+          }
+        ], {}, [
+          refer(allocate(implementation)),
+        ]).statement,
+    ]);
   }
+}
 
-  throw Exception('Unknown register type: ${injectable.registerType}');
+extension _ExpressionX on Expression {
+  Expression get lambda => Method(
+        (p) => p
+          ..lambda = true
+          ..body = code,
+      ).closure;
 }
 
 Expression _writeFactory(
