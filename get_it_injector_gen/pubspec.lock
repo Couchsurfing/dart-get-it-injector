@@ -50,10 +50,10 @@ packages:
     dependency: "direct dev"
     description:
       name: autoequal_gen
-      sha256: dc58737eaec53da235281d95e2d1975dd898bb39d8466562ca4a67f77a9fbfe8
+      sha256: "5d0fc99be0e75af772ddccf056a42aa9e332571e534944af6eb4690b67fd9b4c"
       url: "https://pub.dev"
     source: hosted
-    version: "0.9.1"
+    version: "0.9.2"
   bloc:
     dependency: "direct dev"
     description:
@@ -146,10 +146,10 @@ packages:
     dependency: "direct main"
     description:
       name: change_case
-      sha256: "99cfdf2018c627c8a3af5a23ea4c414eb69c75c31322d23b9660ebc3cf30b514"
+      sha256: e41ef3df58521194ef8d7649928954805aeb08061917cf658322305e61568003
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.0"
+    version: "2.2.0"
   checked_yaml:
     dependency: transitive
     description:
@@ -250,10 +250,10 @@ packages:
     dependency: "direct dev"
     description:
       name: generator_test
-      sha256: e92701a11e77b814fcc23f1e5aed4ee26e95c08e14026231a4c2dade7d97bb47
+      sha256: a03045d034da2303f9d119ff332f1a77dcde8613ade79973c3443540fbeca4fe
       url: "https://pub.dev"
     source: hosted
-    version: "0.3.1"
+    version: "0.4.1"
   get_it_injector:
     dependency: "direct main"
     description:
