@@ -70,6 +70,8 @@ class GetItInjectorGenerator extends GeneratorForAnnotation<Setup> {
 
     final output = generated.map((e) => e.accept(emitter)).join('\n');
 
-    return DartFormatter().format(output);
+    return DartFormatter(
+      languageVersion: DartFormatter.latestLanguageVersion,
+    ).format(output);
   }
 }
