@@ -1,3 +1,9 @@
+# 0.5.3 | 2.22.2025
+
+## Chore
+
+- Update Dependencies
+
 # 0.5.0 | 1.3.2025
 
 ## Features
