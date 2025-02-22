@@ -14,8 +14,8 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-import 'package:build/build.dart';
 // --- LICENSE ---
+import 'package:build/build.dart';
 import 'package:get_it_injector_gen/models/settings.dart';
 import 'package:get_it_injector_gen/src/get_it_injector_breakdown_generator.dart';
 import 'package:get_it_injector_gen/src/get_it_injector_generator.dart';
