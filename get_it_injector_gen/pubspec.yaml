@@ -15,7 +15,7 @@ environment:
   sdk: ">=3.5.0 <4.0.0"
 
 dependencies:
-  analyzer: ">=5.0.0 <7.0.0"
+  analyzer: ">=5.0.0 <8.0.0"
   build: ^2.4.1
   change_case: ^2.0.1
   code_builder: ^4.9.0
