@@ -16,6 +16,8 @@ dev_dependencies:
     path: packages/data
   _domain:
     path: packages/domain
+  _typedef:
+    path: packages/type_def
   build_runner: ^2.4.7
   get_it: ^7.6.6
   get_it_injector_gen:

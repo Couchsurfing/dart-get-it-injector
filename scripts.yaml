@@ -30,6 +30,7 @@ publish:
   (bail):
   (command):
     - sip test --bail --recursive --concurrent
+    - "{$test:integration}"
     - "{$prep}"
     - "{$_packages} dart pub publish"
     - "{$publish:commit}"
@@ -125,5 +126,9 @@ test:
       - |
         (+) # Generate data code
         cd get_it_injector_test/packages/data;
+        {$test:integration:_generate}
+      - |
+        (+) # Generate type_def code
+        cd get_it_injector_test/packages/type_def;
         {$test:integration:_generate}
       - cd get_it_injector_test; sip test -r

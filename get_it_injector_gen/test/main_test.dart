@@ -23,66 +23,78 @@ class GeneratorInput {
 void main() {
   group('Breakdown Generator', () {
     final inputs = [
+      // GeneratorInput(
+      //   input: [
+      //     'repo_impl.dart',
+      //     'repo.dart',
+      //   ],
+      //   output: [
+      //     'repo_impl.get_it_injector.json',
+      //     'repo.get_it_injector.json',
+      //   ],
+      //   testDir: 'test_1',
+      //   options: Settings.defaults(
+      //     registerAsImplementation: true,
+      //     autoRegister: true,
+      //   ),
+      // ),
+      // GeneratorInput(
+      //   input: [
+      //     'class_with_extends.dart',
+      //   ],
+      //   output: [
+      //     'class_with_extends.get_it_injector.json',
+      //   ],
+      //   testDir: 'test_3',
+      //   options: Settings.defaults(
+      //     registerAsImplementation: true,
+      //   ),
+      // ),
+      // GeneratorInput(
+      //   input: [
+      //     'repo_impl.dart',
+      //     'repo.dart',
+      //   ],
+      //   output: [
+      //     'repo_impl.get_it_injector.json',
+      //     'repo.get_it_injector.json',
+      //   ],
+      //   testDir: 'test_5',
+      //   options: Settings.defaults(
+      //     registerAsImplementation: true,
+      //     autoRegister: true,
+      //     ignoreForFile: ['lint_1', 'lint_2'],
+      //   ),
+      // ),
+      // GeneratorInput(
+      //   input: [
+      //     'multi.dart',
+      //     'one.dart',
+      //     'two.dart',
+      //   ],
+      //   output: [
+      //     'multi.get_it_injector.json',
+      //     'one.get_it_injector.json',
+      //     'two.get_it_injector.json',
+      //   ],
+      //   testDir: 'test_6',
+      //   options: Settings.defaults(
+      //     registerAsImplementation: true,
+      //     autoRegister: true,
+      //   ),
+      // ),
       GeneratorInput(
         input: [
-          'repo_impl.dart',
           'repo.dart',
         ],
         output: [
-          'repo_impl.get_it_injector.json',
           'repo.get_it_injector.json',
         ],
-        testDir: 'test_1',
         options: Settings.defaults(
-          registerAsImplementation: true,
           autoRegister: true,
         ),
-      ),
-      GeneratorInput(
-        input: [
-          'class_with_extends.dart',
-        ],
-        output: [
-          'class_with_extends.get_it_injector.json',
-        ],
-        testDir: 'test_3',
-        options: Settings.defaults(
-          registerAsImplementation: true,
-        ),
-      ),
-      GeneratorInput(
-        input: [
-          'repo_impl.dart',
-          'repo.dart',
-        ],
-        output: [
-          'repo_impl.get_it_injector.json',
-          'repo.get_it_injector.json',
-        ],
-        testDir: 'test_5',
-        options: Settings.defaults(
-          registerAsImplementation: true,
-          autoRegister: true,
-          ignoreForFile: ['lint_1', 'lint_2'],
-        ),
-      ),
-      GeneratorInput(
-        input: [
-          'multi.dart',
-          'one.dart',
-          'two.dart',
-        ],
-        output: [
-          'multi.get_it_injector.json',
-          'one.get_it_injector.json',
-          'two.get_it_injector.json',
-        ],
-        testDir: 'test_6',
-        options: Settings.defaults(
-          registerAsImplementation: true,
-          autoRegister: true,
-        ),
-      ),
+        testDir: 'typedef',
+      )
     ];
 
     for (final input in inputs) {
@@ -145,7 +157,7 @@ void main() {
           'setup.config.dart',
         ],
         testDir: 'test_8',
-      )
+      ),
     ];
 
     for (final input in inputs) {

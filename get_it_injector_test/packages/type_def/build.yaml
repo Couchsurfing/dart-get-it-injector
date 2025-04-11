@@ -1,0 +1,7 @@
+targets:
+  $default:
+    builders:
+      get_it_injector_gen:
+        enabled: true
+        options:
+          auto_register: true

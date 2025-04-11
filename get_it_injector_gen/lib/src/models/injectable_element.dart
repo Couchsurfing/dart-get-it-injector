@@ -18,6 +18,7 @@ limitations under the License.
 import 'dart:convert';
 
 import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/type.dart';
 import 'package:get_it_injector/get_it_injector.dart'
     show Priority, RegisterType;
 import 'package:get_it_injector_gen/enums/parameter_type.dart';
@@ -75,7 +76,9 @@ Parameter _buildParameter(ParameterElement param) {
   final location =
       param.isNamed ? ParameterType.named : ParameterType.positional;
 
-  final import = type.element?.library?.identifier;
+  final elementImport = type.element?.library?.identifier;
+  final aliasImport = param.element.library2?.identifier;
+  final import = elementImport ?? aliasImport;
 
   if (import == null) {
     throw Exception(
@@ -87,9 +90,14 @@ Parent: ${param.enclosingElement3?.displayName ?? 'Unknown'}
     );
   }
 
+  final typeName = switch (type) {
+    DartType(:final alias?) => alias.element.displayName,
+    _ => type.getDisplayString(),
+  };
+
   return Parameter(
     name: param.name,
-    type: type.getDisplayString(),
+    type: typeName,
     isRequired: isRequired,
     defaultValue: defaultValue,
     location: location,

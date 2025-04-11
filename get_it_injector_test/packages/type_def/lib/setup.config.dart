@@ -6,13 +6,17 @@
 // **************************************************************************
 
 import 'package:get_it/get_it.dart';
-import 'package:_application/blocs/user_bloc.dart' as i_user_bloc;
-import 'package:_domain/repo_interfaces/user_repo.dart' as i_user_repo;
+import 'package:_typedef/repos/legend_of_zelda_repo.dart'
+    as i_legend_of_zelda_repo;
 
 extension GetItX on GetIt {
   void init() {
+    registerFactory(() => i_legend_of_zelda_repo.LegendOfZeldaRepo());
     registerFactory(
-      () => i_user_bloc.UserBloc(userRepo: get<i_user_repo.UserRepo>()),
+      () => i_legend_of_zelda_repo.LegendOfZeldaRepoConsumer(
+        legendOfZeldaRepoFactory:
+            get<i_legend_of_zelda_repo.LegendOfZeldaRepoFactory>(),
+      ),
     );
   }
 }
