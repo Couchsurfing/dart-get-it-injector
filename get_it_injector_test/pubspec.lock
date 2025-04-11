@@ -256,14 +256,14 @@ packages:
       path: "../get_it_injector"
       relative: true
     source: path
-    version: "0.5.4"
+    version: "0.5.5"
   get_it_injector_gen:
     dependency: "direct dev"
     description:
       path: "../get_it_injector_gen"
       relative: true
     source: path
-    version: "0.5.4"
+    version: "0.5.5"
   glob:
     dependency: transitive
     description:
