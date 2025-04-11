@@ -1,6 +1,6 @@
-class Repo {}
+import 'repo_factory.dart';
 
-typedef RepoFactory = Repo Function();
+class Repo {}
 
 class RepoConsumer {
   const RepoConsumer({

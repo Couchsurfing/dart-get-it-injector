@@ -76,9 +76,11 @@ Parameter _buildParameter(ParameterElement param) {
   final location =
       param.isNamed ? ParameterType.named : ParameterType.positional;
 
-  final elementImport = type.element?.library?.identifier;
-  final aliasImport = param.element.library2?.identifier;
-  final import = elementImport ?? aliasImport;
+  final import = switch (type) {
+    DartType(:final alias?) => alias.element.library.identifier,
+    DartType(element: Element(:final library?)) => library.identifier,
+    _ => null,
+  };
 
   if (import == null) {
     throw Exception(

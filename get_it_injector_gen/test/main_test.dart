@@ -86,6 +86,7 @@ void main() {
       GeneratorInput(
         input: [
           'repo.dart',
+          'repo_factory.dart',
         ],
         output: [
           'repo.get_it_injector.json',
