@@ -260,7 +260,7 @@ packages:
       path: "../get_it_injector"
       relative: true
     source: path
-    version: "0.5.3"
+    version: "0.5.4"
   glob:
     dependency: "direct main"
     description:

@@ -1,3 +1,10 @@
+# 0.5.4 | 4.11.2025
+
+## Features
+
+- Support injecting alias parameters
+  - (Types that are defined with `typedef`)
+
 # 0.5.3 | 2.22.2025
 
 ## Chore
