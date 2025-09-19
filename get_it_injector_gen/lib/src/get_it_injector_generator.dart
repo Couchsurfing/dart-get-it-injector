@@ -1,4 +1,6 @@
 // --- LICENSE ---
+// ignore_for_file: deprecated_member_use
+
 /**
 Copyright 2025 CouchSurfing International Inc.
 
@@ -18,7 +20,7 @@ limitations under the License.
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/element2.dart';
 import 'package:build/build.dart';
 import 'package:code_builder/code_builder.dart';
 import 'package:dart_style/dart_style.dart';
@@ -36,11 +38,11 @@ class GetItInjectorGenerator extends GeneratorForAnnotation<Setup> {
 
   @override
   FutureOr<String> generateForAnnotatedElement(
-    Element element,
+    Element2 element,
     ConstantReader annotation,
     BuildStep buildStep,
   ) async {
-    if (element is! FunctionElement) {
+    if (element is! TopLevelFunctionElement) {
       throw InvalidGenerationSourceError(
         'Setup annotation can only be used on functions.',
         element: element,

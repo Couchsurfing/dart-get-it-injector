@@ -23,6 +23,6 @@ import 'FILE_NAME.config.dart'; // replace FILE_NAME with the name of _this_ fil
 final getIt = GetIt.instance;
 
 @setup
-Future<void> setup() {
+Future<void> setupGetIt() {
   getIt.init();
 }

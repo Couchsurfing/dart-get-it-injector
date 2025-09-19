@@ -1,4 +1,6 @@
 // --- LICENSE ---
+// ignore_for_file: deprecated_member_use
+
 /**
 Copyright 2025 CouchSurfing International Inc.
 
@@ -15,15 +17,16 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 // --- LICENSE ---
-import 'package:analyzer/dart/element/element.dart';
-import 'package:analyzer/dart/element/visitor.dart';
+
+import 'package:analyzer/dart/element/element2.dart';
+import 'package:analyzer/dart/element/visitor2.dart';
 import 'package:get_it_injector/get_it_injector.dart' hide Group;
 import 'package:get_it_injector_gen/models/group.dart';
 import 'package:get_it_injector_gen/models/settings.dart';
 import 'package:get_it_injector_gen/src/checkers/checkers.dart';
 import 'package:get_it_injector_gen/src/models/models.dart' as gen;
 
-class ClassVisitor extends RecursiveElementVisitor<void> {
+class ClassVisitor extends RecursiveElementVisitor2<void> {
   ClassVisitor(this.settings);
 
   final Settings settings;
@@ -31,7 +34,7 @@ class ClassVisitor extends RecursiveElementVisitor<void> {
   final List<gen.InjectableElement> nodes = [];
 
   @override
-  void visitClassElement(ClassElement node) {
+  void visitClassElement(ClassElement2 node) {
     if (ignoreChecker.hasAnnotationOf(node, throwOnUnresolved: false)) {
       return;
     }
@@ -44,9 +47,11 @@ class ClassVisitor extends RecursiveElementVisitor<void> {
       return;
     }
 
-    final ConstructorElement constructor = _getConstructor(node);
-    final Iterable<ClassElement> implementations =
-        _getImplementation(node, settings);
+    final ConstructorElement2 constructor = _getConstructor(node);
+    final Iterable<ClassElement2> implementations = _getImplementation(
+      node,
+      settings,
+    );
     final Priority? priority = _getPriority(node, settings);
     final Group? group = _getGroup(node, settings);
     final RegisterType? registerType = _getRegisterType(node, settings);
@@ -70,8 +75,10 @@ class ClassVisitor extends RecursiveElementVisitor<void> {
   }
 }
 
-Iterable<ClassElement> _getImplementation(
-    ClassElement node, Settings settings) sync* {
+Iterable<ClassElement2> _getImplementation(
+  ClassElement2 node,
+  Settings settings,
+) sync* {
   if (!settings.registerAsImplementation) {
     return;
   }
@@ -92,32 +99,40 @@ Iterable<ClassElement> _getImplementation(
       .where((e) => e.isNotEmpty);
 
   for (final interface in node.interfaces) {
-    if (interface.element is! ClassElement) {
+    if (interface.element3 is! ClassElement2) {
       continue;
     }
 
-    if (!classNames.contains(interface.element.name)) {
+    if (!classNames.contains(interface.element3.name3)) {
       continue;
     }
 
-    yield interface.element as ClassElement;
+    yield interface.element3 as ClassElement2;
   }
 }
 
-Priority? _getPriority(ClassElement node, Settings settings) {
-  final priorityAnnotation =
-      priorityChecker.firstAnnotationOf(node, throwOnUnresolved: false);
+Priority? _getPriority(ClassElement2 node, Settings settings) {
+  final priorityAnnotation = priorityChecker.firstAnnotationOf(
+    node,
+    throwOnUnresolved: false,
+  );
 
   if (priorityAnnotation != null) {
     return gen.Priority.fromAnnotation(priorityAnnotation);
   }
 
-  return settings.getPriorityForClass(node.name);
+  if (node.name3 case final String name) {
+    return settings.getPriorityForClass(name);
+  }
+
+  return null;
 }
 
-Group? _getGroup(ClassElement node, Settings settings) {
-  final groupAnnotation =
-      groupChecker.firstAnnotationOf(node, throwOnUnresolved: false);
+Group? _getGroup(ClassElement2 node, Settings settings) {
+  final groupAnnotation = groupChecker.firstAnnotationOf(
+    node,
+    throwOnUnresolved: false,
+  );
 
   if (groupAnnotation != null) {
     return gen.Group.fromAnnotation(
@@ -126,12 +141,18 @@ Group? _getGroup(ClassElement node, Settings settings) {
     );
   }
 
-  return settings.getGroupForClass(node.name);
+  if (node.name3 case final String name) {
+    return settings.getGroupForClass(name);
+  }
+
+  return null;
 }
 
-RegisterType? _getRegisterType(ClassElement node, Settings settings) {
-  final registerAsAnnotation =
-      registerAsChecker.firstAnnotationOf(node, throwOnUnresolved: false);
+RegisterType? _getRegisterType(ClassElement2 node, Settings settings) {
+  final registerAsAnnotation = registerAsChecker.firstAnnotationOf(
+    node,
+    throwOnUnresolved: false,
+  );
 
   if (registerAsAnnotation != null) {
     final registerAs = gen.RegisterAs.fromAnnotation(registerAsAnnotation);
@@ -139,11 +160,15 @@ RegisterType? _getRegisterType(ClassElement node, Settings settings) {
     return registerAs;
   }
 
-  return settings.getRegisterTypeForClass(node.name)?.annotationValue;
+  if (node.name3 case final String name) {
+    return settings.getRegisterTypeForClass(name)?.annotationValue;
+  }
+
+  return null;
 }
 
-ConstructorElement _getConstructor(ClassElement node) {
-  final constructors = node.constructors.where((e) {
+ConstructorElement2 _getConstructor(ClassElement2 node) {
+  final constructors = node.constructors2.where((e) {
     if (ignoreChecker.hasAnnotationOf(e, throwOnUnresolved: false)) {
       return false;
     }
@@ -156,14 +181,14 @@ ConstructorElement _getConstructor(ClassElement node) {
   }).toList();
 
   if (constructors.isEmpty) {
-    throw Exception('No constructors found for ${node.name}');
+    throw Exception('No constructors found for ${node.name3}');
   }
 
   if (constructors.length == 1) {
     return constructors.first;
   }
 
-  ConstructorElement? constructor;
+  ConstructorElement2? constructor;
 
   for (final ctor in constructors) {
     if (ctor.isDefaultConstructor) {
@@ -177,5 +202,5 @@ ConstructorElement _getConstructor(ClassElement node) {
     }
   }
 
-  return constructor ?? node.constructors.first;
+  return constructor ?? node.constructors2.first;
 }

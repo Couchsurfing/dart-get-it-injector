@@ -7,12 +7,9 @@ part of 'implementation.dart';
 // **************************************************************************
 
 Implementation _$ImplementationFromJson(Map json) => Implementation(
-      type: json['type'] as String,
-      import: json['import'] as String,
-    );
+  type: json['type'] as String,
+  import: json['import'] as String,
+);
 
 Map<String, dynamic> _$ImplementationToJson(Implementation instance) =>
-    <String, dynamic>{
-      'type': instance.type,
-      'import': instance.import,
-    };
+    <String, dynamic>{'type': instance.type, 'import': instance.import};

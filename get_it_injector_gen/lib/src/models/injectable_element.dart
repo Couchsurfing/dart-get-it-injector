@@ -1,4 +1,6 @@
 // --- LICENSE ---
+// ignore_for_file: deprecated_member_use
+
 /**
 Copyright 2025 CouchSurfing International Inc.
 
@@ -17,7 +19,7 @@ limitations under the License.
 // --- LICENSE ---
 import 'dart:convert';
 
-import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/element2.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:get_it_injector/get_it_injector.dart'
     show Priority, RegisterType;
@@ -38,9 +40,9 @@ class InjectableElement {
     required this.ignoreForFile,
   });
 
-  final ClassElement element;
-  final List<InterfaceElement> implementations;
-  final ConstructorElement constructor;
+  final ClassElement2 element;
+  final List<InterfaceElement2> implementations;
+  final ConstructorElement2 constructor;
   final Priority priority;
   final Group? group;
   final RegisterType registerType;
@@ -48,17 +50,17 @@ class InjectableElement {
 
   String toJson() {
     final injectable = Injectable(
-      type: element.name,
-      import: element.library.identifier,
+      type: element.name3 ?? '',
+      import: element.library2.identifier,
       implementations: [
         for (final impl in implementations)
           Implementation(
-            type: impl.name,
-            import: impl.library.identifier,
+            type: impl.name3 ?? '',
+            import: impl.library2.identifier,
           ),
       ],
-      constructor: constructor.name,
-      parameters: constructor.parameters.map(_buildParameter).toList(),
+      constructor: constructor.name3 ?? '',
+      parameters: constructor.formalParameters.map(_buildParameter).toList(),
       priority: priority.value,
       group: group,
       registerType: registerType,
@@ -69,41 +71,40 @@ class InjectableElement {
   }
 }
 
-Parameter _buildParameter(ParameterElement param) {
+Parameter _buildParameter(FormalParameterElement param) {
   final type = param.type;
   final isRequired = param.isRequiredNamed || param.isRequiredPositional;
   final defaultValue = param.defaultValueCode;
-  final location =
-      param.isNamed ? ParameterType.named : ParameterType.positional;
+  final location = param.isNamed
+      ? ParameterType.named
+      : ParameterType.positional;
 
   final import = switch (type) {
-    DartType(:final alias?) => alias.element.library.identifier,
-    DartType(element: Element(:final library?)) => library.identifier,
+    DartType(:final alias?) => alias.element2.library2.identifier,
+    DartType(element3: Element2(:final library2?)) => library2.identifier,
     _ => null,
   };
 
   if (import == null) {
-    throw Exception(
-      '''Failed to find import!
+    throw Exception('''Failed to find import!
 Type: ${type.getDisplayString()}
 Param: ${param.displayName}
-Parent: ${param.enclosingElement3?.displayName ?? 'Unknown'}
-      ''',
-    );
+Parent: ${param.enclosingElement2?.displayName ?? 'Unknown'}
+      ''');
   }
 
   final typeName = switch (type) {
-    DartType(:final alias?) => alias.element.displayName,
+    DartType(:final alias?) => alias.element2.displayName,
     _ => type.getDisplayString(),
   };
 
   return Parameter(
-    name: param.name,
+    name: param.name3 ?? '',
     type: typeName,
     isRequired: isRequired,
     defaultValue: defaultValue,
     location: location,
     import: import,
-    parameters: param.parameters.map(_buildParameter).toList(),
+    parameters: param.formalParameters.map(_buildParameter).toList(),
   );
 }

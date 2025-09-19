@@ -12,11 +12,6 @@
 #           any_map: true
 #           field_rename: snake
 
-#       autoequal_gen:
-#         enabled: true
-#         options:
-#           auto_include: true
-
 builders:
   get_it_injector_gen:
     target: get_it_injector_gen

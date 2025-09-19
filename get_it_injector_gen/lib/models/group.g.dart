@@ -3,26 +3,15 @@
 part of 'group.dart';
 
 // **************************************************************************
-// AutoequalGenerator
-// **************************************************************************
-
-extension _$GroupAutoequal on Group {
-  List<Object?> get _$props => [
-        name,
-        priority,
-      ];
-}
-
-// **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
 Group _$GroupFromJson(Map json) => Group(
-      name: json['name'] as String,
-      priority: (json['priority'] as num).toInt(),
-    );
+  name: json['name'] as String,
+  priority: (json['priority'] as num).toInt(),
+);
 
 Map<String, dynamic> _$GroupToJson(Group instance) => <String, dynamic>{
-      'name': instance.name,
-      'priority': instance.priority,
-    };
+  'name': instance.name,
+  'priority': instance.priority,
+};

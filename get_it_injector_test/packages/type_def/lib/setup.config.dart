@@ -1,5 +1,5 @@
-// dart format width=80
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// dart format width=80
 
 // **************************************************************************
 // GetItInjectorGenerator
@@ -11,9 +11,9 @@ import 'package:_typedef/repos/legend_of_zelda_repo.dart'
 
 extension GetItX on GetIt {
   void init() {
-    registerFactory(() => i_legend_of_zelda_repo.LegendOfZeldaRepo());
+    registerFactory(() => i_legend_of_zelda_repo.LegendOfZeldaRepo.new());
     registerFactory(
-      () => i_legend_of_zelda_repo.LegendOfZeldaRepoConsumer(
+      () => i_legend_of_zelda_repo.LegendOfZeldaRepoConsumer.new(
         legendOfZeldaRepoFactory:
             get<i_legend_of_zelda_repo.LegendOfZeldaRepoFactory>(),
       ),

@@ -9,13 +9,13 @@ issue_tracker: https://github.com/Couchsurfing/dart-get-it-injector/issues
 
 topics: [dependency-injection, get-it, code-generation]
 
-version: 0.5.6
+version: 0.6.0
 
 environment:
-  sdk: ">=3.5.0 <4.0.0"
+  sdk: ">=3.7.0 <4.0.0"
 
 dependencies:
-  meta: ">=1.15.0"
+  meta: ">=1.0.0 <2.0.0"
 
 dev_dependencies:
   equatable: ^2.0.7

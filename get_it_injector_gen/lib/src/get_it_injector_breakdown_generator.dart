@@ -1,4 +1,6 @@
 // --- LICENSE ---
+// ignore_for_file: deprecated_member_use
+
 /**
 Copyright 2025 CouchSurfing International Inc.
 
@@ -19,7 +21,6 @@ import 'dart:async' show FutureOr;
 
 import 'package:build/build.dart';
 import 'package:get_it_injector_gen/models/settings.dart';
-
 import 'package:get_it_injector_gen/src/visitors/class_visitor.dart';
 import 'package:source_gen/source_gen.dart' hide TypeChecker;
 
@@ -31,7 +32,7 @@ final class GetItInjectorBreakdownGenerator extends Generator {
   @override
   FutureOr<String?> generate(LibraryReader library, BuildStep buildStep) async {
     final visitor = ClassVisitor(settings);
-    library.element.visitChildren(visitor);
+    library.element.visitChildren2(visitor);
 
     if (visitor.nodes.isEmpty) {
       return null;

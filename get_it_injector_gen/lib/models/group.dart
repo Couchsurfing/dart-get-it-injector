@@ -23,10 +23,7 @@ part 'group.g.dart';
 
 @JsonSerializable()
 class Group extends Equatable implements annotations.Group {
-  const Group({
-    required this.name,
-    required this.priority,
-  });
+  const Group({required this.name, required this.priority});
 
   factory Group.fromJson(Map json) => _$GroupFromJson(json);
 
@@ -36,5 +33,5 @@ class Group extends Equatable implements annotations.Group {
   Map<String, dynamic> toJson() => _$GroupToJson(this);
 
   @override
-  List<Object?> get props => _$props;
+  List<Object?> get props => [name, priority];
 }

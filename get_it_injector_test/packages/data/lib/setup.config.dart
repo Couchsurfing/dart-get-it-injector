@@ -1,5 +1,5 @@
-// dart format width=80
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// dart format width=80
 
 // **************************************************************************
 // GetItInjectorGenerator
@@ -25,19 +25,20 @@ extension GetItX on GetIt {
 
   void _registerCache() {
     registerLazySingleton<i_user_cache.UserCache>(
-      () => i_user_cache_impl.UserCacheImpl(),
+      () => i_user_cache_impl.UserCacheImpl.new(),
     );
   }
 
   void _registerDataSource() {
     registerFactory<i_user_data_source.UserDataSource>(
-      () => i_user_data_source_impl.UserDataSourceImpl(dio: get<i_dio.Dio>()),
+      () =>
+          i_user_data_source_impl.UserDataSourceImpl.new(dio: get<i_dio.Dio>()),
     );
   }
 
   void _registerRepo() {
     registerFactory<i_user_repo.UserRepo>(
-      () => i_user_repo_impl.UserRepoImpl(
+      () => i_user_repo_impl.UserRepoImpl.new(
         userDataSource: get<i_user_data_source.UserDataSource>(),
         userCache: get<i_user_cache.UserCache>(),
       ),
