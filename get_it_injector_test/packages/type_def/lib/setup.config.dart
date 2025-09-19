@@ -11,9 +11,9 @@ import 'package:_typedef/repos/legend_of_zelda_repo.dart'
 
 extension GetItX on GetIt {
   void init() {
-    registerFactory(() => i_legend_of_zelda_repo.LegendOfZeldaRepo.new());
+    registerFactory(() => i_legend_of_zelda_repo.LegendOfZeldaRepo());
     registerFactory(
-      () => i_legend_of_zelda_repo.LegendOfZeldaRepoConsumer.new(
+      () => i_legend_of_zelda_repo.LegendOfZeldaRepoConsumer(
         legendOfZeldaRepoFactory:
             get<i_legend_of_zelda_repo.LegendOfZeldaRepoFactory>(),
       ),

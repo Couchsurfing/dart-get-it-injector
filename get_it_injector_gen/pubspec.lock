@@ -231,7 +231,7 @@ packages:
       path: "../get_it_injector"
       relative: true
     source: path
-    version: "0.5.6"
+    version: "0.6.0"
   glob:
     dependency: "direct main"
     description:

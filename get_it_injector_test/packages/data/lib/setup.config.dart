@@ -25,20 +25,19 @@ extension GetItX on GetIt {
 
   void _registerCache() {
     registerLazySingleton<i_user_cache.UserCache>(
-      () => i_user_cache_impl.UserCacheImpl.new(),
+      () => i_user_cache_impl.UserCacheImpl(),
     );
   }
 
   void _registerDataSource() {
     registerFactory<i_user_data_source.UserDataSource>(
-      () =>
-          i_user_data_source_impl.UserDataSourceImpl.new(dio: get<i_dio.Dio>()),
+      () => i_user_data_source_impl.UserDataSourceImpl(dio: get<i_dio.Dio>()),
     );
   }
 
   void _registerRepo() {
     registerFactory<i_user_repo.UserRepo>(
-      () => i_user_repo_impl.UserRepoImpl.new(
+      () => i_user_repo_impl.UserRepoImpl(
         userDataSource: get<i_user_data_source.UserDataSource>(),
         userCache: get<i_user_cache.UserCache>(),
       ),

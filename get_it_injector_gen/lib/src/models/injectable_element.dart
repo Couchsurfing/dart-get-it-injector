@@ -59,7 +59,10 @@ class InjectableElement {
             import: impl.library2.identifier,
           ),
       ],
-      constructor: constructor.name3 ?? '',
+      constructor: switch (constructor.name3) {
+        'new' || null => '',
+        final name => name,
+      },
       parameters: constructor.formalParameters.map(_buildParameter).toList(),
       priority: priority.value,
       group: group,
