@@ -24,8 +24,9 @@ class NamedImport {
   final String import;
 
   String get namespace {
-    final basename = basenameWithoutExtension(import)
-        .replaceAll(RegExp('[^a-zA-Z0-9]'), '_');
+    final basename = basenameWithoutExtension(
+      import,
+    ).replaceAll(RegExp('[^a-zA-Z0-9]'), '_');
 
     return 'i_$basename';
   }

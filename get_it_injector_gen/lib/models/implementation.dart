@@ -22,10 +22,7 @@ part 'implementation.g.dart';
 
 @JsonSerializable()
 class Implementation implements Importable {
-  const Implementation({
-    required this.type,
-    required this.import,
-  });
+  const Implementation({required this.type, required this.import});
 
   factory Implementation.fromJson(Map<String, dynamic> json) =>
       _$ImplementationFromJson(json);

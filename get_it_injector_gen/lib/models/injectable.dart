@@ -58,11 +58,11 @@ class Injectable with Parameters implements Importable {
   String get constructorAccess => constructor == '' ? '' : '.$constructor';
 
   Iterable<String> get imports => [
-        ...parameterImports,
-        for (final implementation in implementations)
-          if (implementation.import case final String value) value,
-        import,
-      ];
+    ...parameterImports,
+    for (final implementation in implementations)
+      if (implementation.import case final String value) value,
+    import,
+  ];
 
   Map<String, dynamic> toJson() => _$InjectableToJson(this);
 }

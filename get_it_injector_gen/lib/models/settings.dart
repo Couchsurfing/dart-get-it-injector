@@ -59,18 +59,24 @@ class Settings implements SettingsInterface {
 
     final patterns = <String, List<String>>{};
 
-    result.priorities
-        .forEach((e) => patterns.putIfAbsent(e, () => []).add('priorities'));
-    result.register
-        .forEach((e) => patterns.putIfAbsent(e, () => []).add('register'));
-    result.factories
-        .forEach((e) => patterns.putIfAbsent(e, () => []).add('factories'));
+    result.priorities.forEach(
+      (e) => patterns.putIfAbsent(e, () => []).add('priorities'),
+    );
+    result.register.forEach(
+      (e) => patterns.putIfAbsent(e, () => []).add('register'),
+    );
+    result.factories.forEach(
+      (e) => patterns.putIfAbsent(e, () => []).add('factories'),
+    );
     result.lazySingletons.forEach(
-        (e) => patterns.putIfAbsent(e, () => []).add('lazy_singletons'));
-    result.singletons
-        .forEach((e) => patterns.putIfAbsent(e, () => []).add('singletons'));
+      (e) => patterns.putIfAbsent(e, () => []).add('lazy_singletons'),
+    );
+    result.singletons.forEach(
+      (e) => patterns.putIfAbsent(e, () => []).add('singletons'),
+    );
     result.doNotRegister.forEach(
-        (e) => patterns.putIfAbsent(e, () => []).add('do_not_register'));
+      (e) => patterns.putIfAbsent(e, () => []).add('do_not_register'),
+    );
 
     // make sure that the priorities patterns are valid regex
     for (final MapEntry(key: pattern, value: locations) in patterns.entries) {

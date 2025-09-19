@@ -34,18 +34,16 @@ List<Spec> writeConfig(List<Injectable> injectables) {
     _indexedImports[import] = NamedImport(import);
   }
 
-  final allIgnores =
-      injectables.expand((e) => e.ignoreForFile).toSet().toList();
+  final allIgnores = injectables
+      .expand((e) => e.ignoreForFile)
+      .toSet()
+      .toList();
 
   final ignore = _writeIgnores(allIgnores);
   final import = _writeImports(_indexedImports.values);
   final extension = _writeExtension(injectables);
 
-  return [
-    ...ignore,
-    ...import,
-    extension,
-  ];
+  return [...ignore, ...import, extension];
 }
 
 List<Code> _writeIgnores(Iterable<String> ignores) {
@@ -60,25 +58,15 @@ List<Code> _writeIgnores(Iterable<String> ignores) {
 // get_it/get_it.dart
 List<Spec> _writeImports(Iterable<NamedImport> imports) {
   final directives = imports
-      .map(
-        (e) => Directive.import(
-          e.import,
-          as: e.namespace,
-        ),
-      )
+      .map((e) => Directive.import(e.import, as: e.namespace))
       .toList();
 
   directives.sort((a, b) => a.url.compareTo(b.url));
 
-  return [
-    Directive.import('package:get_it/get_it.dart'),
-    ...directives,
-  ];
+  return [Directive.import('package:get_it/get_it.dart'), ...directives];
 }
 
-Extension _writeExtension(
-  List<Injectable> injectables,
-) {
+Extension _writeExtension(List<Injectable> injectables) {
   final groupedInjectables = <Group, List<Injectable>>{};
   final nonGroupedInjectables = <Injectable>[];
 
@@ -104,14 +92,14 @@ Extension _writeExtension(
             ..body = Block(
               (b) => b
                 ..statements.addAll(
-                  sortedGroupedInjectables.map((e) =>
-                      refer('_register${e.name.toPascalCase()}')
-                          .call([]).statement),
+                  sortedGroupedInjectables.map(
+                    (e) => refer(
+                      '_register${e.name.toPascalCase()}',
+                    ).call([]).statement,
+                  ),
                 )
                 ..statements.addAll(
-                  nonGroupedInjectables.map(
-                    (e) => _writeInjectable(e),
-                  ),
+                  nonGroupedInjectables.map((e) => _writeInjectable(e)),
                 ),
             ),
         ),
@@ -122,14 +110,9 @@ Extension _writeExtension(
   );
 }
 
-Method _writeGroupedInjectables(
-  Group group,
-  List<Injectable> injectables,
-) {
+Method _writeGroupedInjectables(Group group, List<Injectable> injectables) {
   final sortedInjectables = injectables.toList()
-    ..sort(
-      (a, b) => a.priority.compareTo(b.priority),
-    );
+    ..sort((a, b) => a.priority.compareTo(b.priority));
 
   return Method.returnsVoid(
     (b) => b
@@ -137,17 +120,13 @@ Method _writeGroupedInjectables(
       ..body = Block(
         (b) => b
           ..statements.addAll(
-            sortedInjectables.map(
-              (e) => _writeInjectable(e),
-            ),
+            sortedInjectables.map((e) => _writeInjectable(e)),
           ),
       ),
   );
 }
 
-Code _writeInjectable(
-  Injectable injectable,
-) {
+Code _writeInjectable(Injectable injectable) {
   final register = switch (injectable.registerType) {
     RegisterType.factory => 'registerFactory',
     RegisterType.singleton => 'registerSingleton',
@@ -157,71 +136,73 @@ Code _writeInjectable(
   final registerable = switch (injectable.registerType) {
     RegisterType.singleton => _writeSingleton(injectable),
     RegisterType.factory ||
-    RegisterType.lazySingleton =>
-      _writeFactory(injectable),
+    RegisterType.lazySingleton => _writeFactory(injectable),
   };
 
   if (injectable.implementsOne) {
-    return refer(register).call(
-      [registerable],
-      {},
-      [
-        if (injectable.implementations.single case final value)
-          refer(allocate(value)),
-      ],
-    ).statement;
+    return refer(register)
+        .call(
+          [registerable],
+          {},
+          [
+            if (injectable.implementations.single case final value)
+              refer(allocate(value)),
+          ],
+        )
+        .statement;
   } else {
     return Block.of([
       refer(register).call([registerable], {}, []).statement,
       for (final implementation in injectable.implementations)
-        refer(register).call([
-          switch (refer('get').call([], {}, [refer(allocate(injectable))])) {
-            final value
-                when injectable.registerType == RegisterType.singleton =>
-              value,
-            final value => value.lambda,
-          }
-        ], {}, [
-          refer(allocate(implementation)),
-        ]).statement,
+        refer(register)
+            .call(
+              [
+                switch (refer(
+                  'get',
+                ).call([], {}, [refer(allocate(injectable))])) {
+                  final value
+                      when injectable.registerType == RegisterType.singleton =>
+                    value,
+                  final value => value.lambda,
+                },
+              ],
+              {},
+              [refer(allocate(implementation))],
+            )
+            .statement,
     ]);
   }
 }
 
 extension _ExpressionX on Expression {
   Expression get lambda => Method(
-        (p) => p
-          ..lambda = true
-          ..body = code,
-      ).closure;
-}
-
-Expression _writeFactory(
-  Injectable injectable,
-) {
-  return Method(
-    (b) => b
+    (p) => p
       ..lambda = true
-      ..body = Block((b) => b
-        // make new call to .type
-        ..statements.add(
-          _writeInvocation(injectable).code,
-        )),
+      ..body = code,
   ).closure;
 }
 
-Expression _writeSingleton(
-  Injectable injectable,
-) {
+Expression _writeFactory(Injectable injectable) {
+  return Method(
+    (b) => b
+      ..lambda = true
+      ..body = Block(
+        (b) => b
+          // make new call to .type
+          ..statements.add(_writeInvocation(injectable).code),
+      ),
+  ).closure;
+}
+
+Expression _writeSingleton(Injectable injectable) {
   return _writeInvocation(injectable);
 }
 
 Expression _writeInvocation(Injectable injectable) {
-  return refer('${allocate(injectable)}${injectable.constructorAccess}')
-      .newInstance(
-    [
-      ...injectable.positionalParameters.map(_writeParameter),
-    ],
+  return refer(
+    '${allocate(injectable)}${injectable.constructorAccess}',
+  ).newInstance(
+    [...injectable.positionalParameters.map(_writeParameter)],
     {
       for (final param in injectable.namedParameters)
         param.name: _writeParameter(param),
@@ -229,13 +210,9 @@ Expression _writeInvocation(Injectable injectable) {
   );
 }
 
-Expression _writeParameter(
-  Parameter param,
-) {
+Expression _writeParameter(Parameter param) {
   return refer('get').newInstance(
-    [
-      ...param.positionalParameters.map(_writeParameter),
-    ],
+    [...param.positionalParameters.map(_writeParameter)],
     {
       for (final param in param.namedParameters)
         param.name: _writeParameter(param),

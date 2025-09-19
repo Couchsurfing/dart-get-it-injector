@@ -20,10 +20,7 @@ import 'package:get_it_injector/get_it_injector.dart';
 import 'package:get_it_injector_gen/models/group.dart' as core;
 
 class Group extends core.Group {
-  const Group({
-    required super.name,
-    required super.priority,
-  });
+  const Group({required super.name, required super.priority});
 
   factory Group.fromAnnotation(
     DartObject annotation,
@@ -31,9 +28,6 @@ class Group extends core.Group {
   ) {
     final name = annotation.getField('name')!.toStringValue()!;
 
-    return Group(
-      name: name,
-      priority: getPriority(name) ?? lowPriority.value,
-    );
+    return Group(name: name, priority: getPriority(name) ?? lowPriority.value);
   }
 }

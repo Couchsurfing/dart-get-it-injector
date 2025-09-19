@@ -16,7 +16,8 @@ limitations under the License.
 */
 // --- LICENSE ---
 import 'package:json_annotation/json_annotation.dart';
-import 'package:get_it_injector/get_it_injector.dart' as annotations
+import 'package:get_it_injector/get_it_injector.dart'
+    as annotations
     show RegisterType;
 
 @JsonEnum(fieldRename: FieldRename.snake)

@@ -18,20 +18,38 @@ limitations under the License.
 import 'package:get_it_injector/get_it_injector.dart';
 import 'package:source_gen/source_gen.dart';
 
-const setupChecker =
-    TypeChecker.typeNamed(Setup, inPackage: 'get_it_injector', inSdk: false);
+const setupChecker = TypeChecker.typeNamed(
+  Setup,
+  inPackage: 'get_it_injector',
+  inSdk: false,
+);
 
-const ignoreChecker =
-    TypeChecker.typeNamed(Ignore, inPackage: 'get_it_injector', inSdk: false);
+const ignoreChecker = TypeChecker.typeNamed(
+  Ignore,
+  inPackage: 'get_it_injector',
+  inSdk: false,
+);
 
-const useChecker =
-    TypeChecker.typeNamed(Use, inPackage: 'get_it_injector', inSdk: false);
+const useChecker = TypeChecker.typeNamed(
+  Use,
+  inPackage: 'get_it_injector',
+  inSdk: false,
+);
 
-const priorityChecker =
-    TypeChecker.typeNamed(Priority, inPackage: 'get_it_injector', inSdk: false);
+const priorityChecker = TypeChecker.typeNamed(
+  Priority,
+  inPackage: 'get_it_injector',
+  inSdk: false,
+);
 
-const groupChecker =
-    TypeChecker.typeNamed(Group, inPackage: 'get_it_injector', inSdk: false);
+const groupChecker = TypeChecker.typeNamed(
+  Group,
+  inPackage: 'get_it_injector',
+  inSdk: false,
+);
 
-const registerAsChecker = TypeChecker.typeNamed(RegisterAs,
-    inPackage: 'get_it_injector', inSdk: false);
+const registerAsChecker = TypeChecker.typeNamed(
+  RegisterAs,
+  inPackage: 'get_it_injector',
+  inSdk: false,
+);
