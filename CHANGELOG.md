@@ -1,3 +1,10 @@
+# 0.6.0 | 9.19.2025
+
+## Features
+
+- Update analyzer
+- Update to sdk 3.8.0
+
 # 0.5.6 | 4.11.2025
 
 ## Features

@@ -64,11 +64,7 @@ class Group {
   final String name;
 }
 
-enum RegisterType {
-  factory,
-  singleton,
-  lazySingleton,
-}
+enum RegisterType { factory, singleton, lazySingleton }
 
 /// {@template register_as}
 /// Register the annotated class as the given [type].
